@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum - Rizan Oesvan Idrati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mt-5">
+
+        <div class="mb-4">
+            <a href="portofolio.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali ke Portofolio
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                        <h1 class="fw-bold">Laporan Praktikum Pemrograman Web: Konfigurasi Laravel</h1>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
+                    <p class="mb-1 text-justify">
+                        Penggunaan framework (kerangka kerja) menjadi solusi utama bagi para pengembang untuk membangun
+                        aplikasi yang terstruktur dan mudah dikelola. Laravel adalah framework PHP open-source yang
+                        dirancang untuk membuat pengembangan web menjadi lebih mudah dan lebih cepat. Secara default,
+                        framework ini menggunakan pola arsitektur MVC (Model-View-Controller) yang membantu memisahkan
+                        logika aplikasi dari tampilan dan pengelolaan data. Framework ini menawarkan berbagai alat dan
+                        pustaka yang membantu pengembang dalam menangani berbagai aspek pengembangan web, mulai dari
+                        routing, otentikasi, hingga manajemen basis data.
+                    </p>
+
+                    <p class="mb-1 text-justify">
+                    <h5 class="fw-bold text-white mb-3">Tujuan Praktikum:</h3>
+                        <ul>
+                            <li>Mempelajari penggunaan framework Laravel dalam pengembangan aplikasi web</li>
+                            <li>Mengetahui cara konfigurasi laravel pada teks editor</li>
+                            <li>Memahami cara pembuatan model, controller, dan view</li>
+                        </ul>
+                        </p>
+
+                        <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah Kerja dan Implementasi</h4>
+                        <p class="mb-4">Berikut adalah tahapan-tahapan pengerjaan beserta tangkapan layar (screenshot)
+                            dari hasil eksekusi kode:</p>
+
+                        <div class="mb-1">
+                            <h5 class="fw-bold">A. Requirements Laravel</h5>
+                            <p class="text-justify">
+                                Sebelum memulai, pastikan bahwa sistem memenuhi persyaratan berikut untuk menjalankan
+                                Laravel:
+                            </p>
+                            <div class="text-center mt-4 mb-3">
+                                <img src="/images/ss11.png" class="img-fluid mb-2" style="max-width: 700px;"
+                                    alt="Screenshot UI">
+                            </div>
+                        </div>
+
+                        <div class="mb-1">
+                            <h5 class="fw-bold">B. Instalasi Laravel</h5>
+                            <p class="text-justify">
+                                Proses instalasi Laravel dilakukan dengan menggunakan terminal PowerShell melalui
+                                perintah <i>composer
+                                    create-project</i>. Dalam proses tersebut, Composer berhasil mengunduh paket utama
+                                laravel/laravel (v12.0.0) dan
+                                menyiapkan struktur direktori proyek. Setelah instalasi selesai, proyek Laravel dapat
+                                masuk ke direktori proyek laravelnya.
+                            </p>
+                            <div class="text-center mt-3 mb-4">
+                                <img src="/images/ss2.png" class="img-fluid mb-2" style="max-width: 700px;"
+                                    alt="Screenshot Fitur Filter">
+                                <img src="/images/ss3.png" class="img-fluid mb-2" style="max-width: 700px;"
+                                    alt="Screenshot Fitur">
+                                <p class="text-justify mb-4">
+                                    Proses instalasi selesai dengan ditandai bahwasannya tahap migrasi database setelah
+                                    aplikasi berhasil terpasang.
+                                    Pada bagian ini, sistem menyiapkan tabel migrasi utama dan menjalankan serangkaian
+                                    perintah migrasi bawaan
+                                    Laravel secara berurutan, seperti pembuatan tabel users, cache, dan jobs, yang
+                                    ditandai dengan status "DONE"
+                                    untuk setiap prosesnya. </p>
+                            </div>
+                        </div>
+
+                        <div class="mb-1">
+                            <h5 class="fw-bold">C. Konfigurasi dan Pembuatan Proyek</h5>
+                            <p class="text-justify">
+                                Setelah setelah berhasil membuat project Laravel, selanjutnya masuk kedalam directory
+                                project Laravel dan
+                                melakukan penginstalan npm untuk untuk menyiapkan aplikasi (Node.js/Frontend) agar siap
+                                digunakan/di-hosting
+                                dengan cara mengunduh semua bahan yang dibutuhkan terlebih dahulu, lalu merapikan dan
+                                mengoptimalkan kode secara
+                                otomatis dengan menjalankan perintah <i>npm install</i> dan <i>npm run dev</i>. Proses
+                                ini memastikan bahwa
+                                semua dependensi frontend yang diperlukan untuk menjalankan aplikasi Laravel telah
+                                terpasang dengan benar, serta
+                                mengompilasi aset-aset seperti CSS dan JavaScript agar siap digunakan.
+                            </p>
+
+                            <div class="row justify-content-center mt-3 mb-4">
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss4.png" class="img-fluid mb-2" alt="Screenshot Kiri">
+                                </div>
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss5.png" class="img-fluid mb-2" alt="Screenshot Kanan">
+                                </div>
+                                <p class="text-justify mb-4">
+                                    Setelah proses instalasi npm selesai, langkah selanjutnya adalah menjalankan
+                                    perintah <i>php artisan serve</i> untuk mengaktifkan server lokal yang berjalan pada
+                                    alamat [http://127.0.0.1:8000] jika berhasil, maka akan muncul tampilan halaman
+                                    utama Laravel yang menandakan bahwa server sudah aktif dan laravel siap digunakan.
+                                </p>
+                                <img src="/images/ss6.png" class="img-fluid mb-2" style="max-width: 700px;">
+
+                            </div>
+                        </div>
+
+                        <div class="mb-1">
+                            <h5 class="fw-bold">D. Testing</h5>
+
+                            <div class="row justify-content-center mt-3 mb-1">
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss12.png" class="img-fluid mb-2" alt="Screenshot Kiri">
+                                </div>
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss7.png" class="img-fluid mb-2" alt="Screenshot Kanan">
+                                </div>
+                                <p class="text-justify mb-4">
+                                    Setelah server aktif, dan proyek sudah dibuat kita akan melakukan testing dengan
+                                    menampilkan hello world pada browser. Konfigurasi routing dasar pada framework
+                                    Laravel di dalam file <i>routes/web.php</i> dengan URL '/hello' yang secara langsung
+                                    mengembalikan
+                                    string teks "Hello World".</p>
+                            </div>
+
+                            <div class="row justify-content-center mt-3 mb-4">
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss8.png" class="img-fluid mb-2" alt="Screenshot Kiri">
+                                </div>
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss9.png" class="img-fluid mb-2" alt="Screenshot Kanan">
+                                </div>
+                                <p class="text-justify mb-4">
+                                    Penggunaan perintah artisan make:controller untuk membuat controller baru dengan
+                                    nama <i>SiswaController</i> yang secara otomatis menghasilkan file controller di
+                                    dalam direktori <i>app/Http/Controllers</i>. Setelah controller berhasil dibuat,
+                                    membuat artisan make:model untuk membuat model baru dengan nama <i>SebuahModel</i>
+                                    yang secara otomatis menghasilkan file model di dalam direktori <i>app/Models</i>.
+                                    untuk konfigurasi dengan tabel di database.
+                                </p>
+                            </div>
+
+                            <h5 class="fw-bold">E. Challenge</h5>
+
+                            <div class="row justify-content-center mt-3 mb-1">
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss14.png" class="img-fluid mb-2" alt="Screenshot Kiri">
+                                    <span class="text-muted small d-block">Challenge 1</span>
+                                </div>
+
+                                <div class="col-md-6 text-center mb-3">
+                                    <img src="/images/ss15.png" class="img-fluid mb-2" alt="Screenshot Kanan">
+                                    <span class="text-muted small d-block">Challenge 2</span>
+                                </div>
+                                <p class="text-justify mb-3">
+                                    Challenge pertama adalah buat 1 buah controller dengan nama studentcontroller,
+                                    kemudian buatkan 1 buah function didalam controller dan 1 view dengan nama index
+                                    didalam folder student(student/index): buat route untuk mengakses function yang
+                                    sudah dibuat di controller, lalu tampilkan <code> resources/view</code> dimana
+                                    terdapat file baru dengan nama index.blade.php yang berisi informasi student
+                                    tersebut. Routing /students akan menampilkan view tersebut. Pada file
+                                    <code>web.php</code> tambahkan kode
+                                    <code>Route::get('/students', [StudentController::class, 'index']);</code>
+                                    setelah itu dapat dijalankan dengan akses URL http://127.0.0.1:8000/students
+                                </p>
+                                <p class="text-justify mb-1">
+                                    Challenge kedua adalah buat sebuah function baru didalam StudentController dengan
+                                    nama lingkaran, yang berisi rumus mencari luas dan keliling lingkaran, berikan input
+                                    jari jari lingkaran. Lalu buat routing/lingkaran yang menampilkan hasil luas dan
+                                    keliling lingkaran. Tanpa menggunakan view!>. Dimana dapat membuat function baru seperti pada gambar dibawah.
+                                <div class="text-center mt-3 mb-4">
+                                <img src="/images/ss13.png" class="img-fluid mb-2" style="max-width: 700px;"
+                                    alt="Screenshot">
+                                </div>
+                            </div>
+
+
+
+                            <h4 class="fw-bold text-primary border-bottom pb-2">3. Kesimpulan</h4>
+                            <p class="mb-5 text-justify">
+                                Praktikum ini memberikan pemahaman mendalam tentang penggunaan framework Laravel dalam
+                                pengembangan aplikasi web. Melalui tahapan instalasi, konfigurasi, dan testing,
+                                berhasil memahami bagaimana Laravel melakukan proses pengembangan dengan menyediakan
+                                berbagai alat dan fitur yang memudahkan pengelolaan proyek.
+                            </p>
+                            
+                            
+                            <div class="mt-4 mb-3">
+                                <a href="https://github.com/RIZ4N/pweb_laravel" target="_blank" class="btn btn-dark btn-sm">
+                                    <i class="bi bi-github"></i> View Repository
+                                </a>
+                            </div>
+
+                            <div>
+                                <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
+                                <span class="badge bg-danger me-1">HTML</span>
+                                <span class="badge bg-primary me-1">Laravel</span>
+                                <span class="badge bg-success">JavaScript</span>
+                            </div>
+
+
+
+                        </div>
+
+                </div>
+            </div>
+    </main>
+
+    <footer class="footer-custom bg-dark text-white py-4 mt-5">
+        <div class="container text-center text-white-50 small">
+            © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

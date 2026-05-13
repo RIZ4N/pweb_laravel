@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Portofolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="portofolio.html">Portfolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="kontak.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="py-5 mt-5">
+    <div class="container text-center">
+      <h1 class="fw-bold mb-3">Portofolio</h1>
+      <p class="lead text-muted">
+        Klik pada kartu untuk melihat detail proyek yang pernah saya buat
+      </p>
+    </div>
+  </section>
+
+  <section class="py-4 sticky-top shadow-sm" style="top: 56px; z-index: 1020">
+    <div class="container">
+      <ul class="nav nav-pills justify-content-center" id="portfolioFilter">
+        <li class="nav-item">
+          <button class="nav-link active" data-filter="all">Semua</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-filter="web">Web Design</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-filter="mobile">Mobile App</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-filter="uiux">UI/UX</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" data-filter="laporan">Laporan</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4" id="portfolioGrid">
+        <div class="col-md-6 col-lg-4 portfolio-item" data-category="web">
+          <div class="card portfolio-card h-100 border-0 shadow-sm" data-bs-toggle="modal" data-bs-target="#modal1">
+            <img src="/images/modal1.jpg" class="card-img-top" alt="Project" />
+            <div class="card-body">
+              <span class="badge bg-primary mb-2">Web Design</span>
+              <h5 class="card-title fw-bold">Web Porto</h5>
+              <p class="card-text text-muted small">
+                Website Portofolio simple dan Profesional
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 portfolio-item" data-category="mobile">
+          <div class="card portfolio-card h-100 border-0 shadow-sm" data-bs-toggle="modal" data-bs-target="#modal2">
+            <img src="/images/modal2.jpg" class="card-img-top" alt="Project" />
+            <div class="card-body">
+              <span class="badge bg-success mb-2">Mobile App</span>
+              <h5 class="card-title fw-bold">Aplikasi Pemesanan Tiket</h5>
+              <p class="card-text text-muted small">
+                Aplikasi Pemesanan Tiket dengan Operasi Penjumlahan
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 portfolio-item" data-category="uiux">
+          <div class="card portfolio-card h-100 border-0 shadow-sm" data-bs-toggle="modal" data-bs-target="#modal3">
+            <img src="/images/modal3.jpg" class="card-img-top" alt="Project" />
+            <div class="card-body">
+              <span class="badge bg-warning text-dark mb-2">UI/UX</span>
+              <h5 class="card-title fw-bold">Remastering Ubuntu</h5>
+              <p class="card-text text-muted small">
+                Redesign antarmuka Ubuntu menjadi Personalisai Sendiri
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 portfolio-item" data-category="mobile">
+          <div class="card portfolio-card h-100 border-0 shadow-sm" data-bs-toggle="modal" data-bs-target="#modal4">
+            <img src="/images/modal4.jpg" class="card-img-top" alt="Project" />
+            <div class="card-body">
+              <span class="badge bg-success mb-2">Mobile App</span>
+              <h5 class="card-title fw-bold">Aplikasi Download Manager</h5>
+              <p class="card-text text-muted small">
+                Aplikasi yang memperlihatkan progress bar dari Download
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 portfolio-item" data-category="mobile">
+          <div class="card portfolio-card h-100 border-0 shadow-sm" data-bs-toggle="modal" data-bs-target="#modal5">
+            <img src="/images/modal5.jpg" class="card-img-top" alt="Project" />
+            <div class="card-body">
+              <span class="badge bg-success mb-2">Mobile App</span>
+              <h5 class="card-title fw-bold">Aplikasi Sorting dengan GUI</h5>
+              <p class="card-text text-muted small">Aplikasi Sorting Array</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 portfolio-item" data-category="uiux">
+          <div class="card portfolio-card h-100 border-0 shadow-sm" data-bs-toggle="modal" data-bs-target="#modal6">
+            <img src="/images/modal6.jpg" class="card-img-top" alt="Project" />
+            <div class="card-body">
+              <span class="badge bg-warning text-dark mb-2">UI/UX</span>
+              <h5 class="card-title fw-bold">Learning Platform</h5>
+              <p class="card-text text-muted small">
+                Desain platform belajar online yang interaktif.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kartu Laporan Praktikum -->
+        <div class="col-md-6 col-lg-4 portfolio-item" data-category="laporan">
+          <!-- Mengarahkan ke file laporan.html -->
+          <a href="laporan.html" class="text-decoration-none">
+            <div class="card portfolio-card h-100 border-0 shadow-sm transition-hover">
+              <img src="/images/modal7.png" class="card-img-top" alt="Laporan Praktikum" />
+              <div class="card-body text-dark">
+                <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                <h5 class="card-title fw-bold">Praktikum Pemrograman Web</h5>
+                <p class="card-text text-muted small">
+                  Laporan lengkap mengenai implementasi UI dan CRUD sederhana.
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Web Porto</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/modal1.jpg" class="img-fluid rounded mb-4 w-100" alt="Detail" />
+          <h6 class="fw-bold text-primary">Tentang Proyek</h6>
+          <p class="text-white-50">
+            Website portofolio pribadi yang menampilkan proyek-proyek terbaik
+            saya. Desain responsif dengan navigasi yang mudah, menonjolkan
+            keahlian di bidang web development dan UI/UX design.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-secondary me-1">Bootstrap 5</span>
+            <span class="badge bg-secondary me-1">CSS</span>
+            <span class="badge bg-secondary">HTML</span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Aplikasi Pemesanan Tiket</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/modal2.jpg" class="img-fluid rounded mb-4 w-100" alt="Detail" />
+          <h6 class="fw-bold text-success">Tentang Proyek</h6>
+          <p class="text-white-50">
+            Aplikasi Pemesanan Tiket sederhana dengan menunjukkan hasil total
+            dari penjumlahan tiket yang dipesan.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-secondary me-1">Java</span>
+            <span class="badge bg-secondary me-1">-</span>
+            <span class="badge bg-secondary">-</span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Remastering Ubuntu</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/modal3.jpg" class="img-fluid rounded mb-4 w-100" alt="Detail" />
+          <h6 class="fw-bold text-warning">Tentang Proyek</h6>
+          <p class="text-white-50">
+            Personalisasi Sistem Operasi Ubuntu menjadi tampilan yang diginkan
+            seperti mengganti walpapper dan logo Booting.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-secondary me-1">Ubuntu</span>
+            <span class="badge bg-secondary me-1">Virtual Box</span>
+            <span class="badge bg-secondary">-</span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Aplikasi Download Manager</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/modal4.jpg" class="img-fluid rounded mb-4 w-100" alt="Detail" />
+          <h6 class="fw-bold text-primary">Tentang Proyek</h6>
+          <p class="text-white-50">
+            Aplikasi pemberitahu proggres dari download file yang sedang
+            berlangsung dengan animasi.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-secondary me-1">Java</span>
+            <span class="badge bg-secondary me-1">Eclipse</span>
+            <span class="badge bg-secondary">Animation Library</span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Aplikasi Sorting dengan GUI</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/modal5.jpg" class="img-fluid rounded mb-4 w-100" alt="Detail" />
+          <h6 class="fw-bold text-success">Tentang Proyek</h6>
+          <p class="text-white-50">
+            Aplikasi Sorting Array dengan menunjukkan langkah-langkah proses
+            sorting secara visual menggunakan GUI.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-secondary me-1">Flutter</span>
+            <span class="badge bg-secondary me-1">Weather</span>
+            <span class="badge bg-secondary">d</span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold">Learning Platform</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img src="/images/modal6.jpg" class="img-fluid rounded mb-4 w-100" alt="Detail" />
+          <h6 class="fw-bold text-warning">Tentang Proyek</h6>
+          <p class="text-white-50">
+            Konsep desain untuk platform kursus online (LMS). Fokus pada
+            pengalaman belajar yang imersif.
+          </p>
+          <div class="mt-3">
+            <span class="badge bg-secondary me-1">UI Design</span>
+            <span class="badge bg-secondary me-1">Figma</span>
+            <span class="badge bg-secondary">Adobe XD</span>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer-custom text-white py-4">
+    <div class="container">
+      <div class="row align-items-start gy-4">
+        <div class="col-12 col-md-5">
+          <p class="text-white-50 small mb-0 text-justify">
+            Mahasiswa Unand yang memiliki ketertarikan dalam bidang teknologi
+            dan keahlian di design serta pengembangan web menggunakan tools
+            seperti HTML, CSS, Bootstrap dan Banyak Lagi. Terimakasih sudah
+            mengunjungi laman saya.
+          </p>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="row justify-content-md-end">
+            <div class="col-6 col-md-auto d-flex flex-column gap-1">
+              <a href="index.html" class="text-white-50 text-decoration-none">Home</a>
+              <a href="about.html" class="text-white-50 text-decoration-none">About</a>
+            </div>
+            <div class="col-6 col-md-auto d-flex flex-column gap-1">
+              <a href="portofolio.html" class="text-white-50 text-decoration-none">Portfolio</a>
+              <a href="kontak.html" class="text-white-50 text-decoration-none">Contact</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-3 d-flex flex-column align-items-start align-items-md-end">
+          <div class="d-flex gap-3">
+            <a href="https://www.instagram.com/rizanoesvan/" target="_blank" class="text-white-50 fs-1"><i
+                class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/feed/" target="_blank" class="text-white-50 fs-1"><i
+                class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-4 mb-3 bg-white-50" />
+      <div class="text-center text-white-50 small">
+        © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

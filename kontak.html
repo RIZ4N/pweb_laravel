@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Kontak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div> 
+    </nav>
+
+    <section class="py-5 mt-5">
+        <div class="container text-center">
+            <h1 class="fw-bold mb-3">Contact Me</h1>
+            <p class="lead text-muted">Silakan kirim pesan atau hubungi melalui kontak di bawah</p>
+        </div>
+    </section>
+
+    <section class="pb-5">
+        <div class="container">
+
+            <div class="row g-4 mb-5 justify-content-center">
+                <div class="col-md-4">
+                    <div class="contact-box">
+                        <div class="feature-icon mx-auto"><i class="bi bi-geo-alt"></i></div>
+                        <h5>Alamat</h5>
+                        <p class="text-muted small mb-0">Jl. Teknologi IX Siteba<br>Sumatera Barat</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-box">
+                        <div class="feature-icon mx-auto"><i class="bi bi-envelope"></i></div>
+                        <h5>Email</h5>
+                        <p class="text-muted small mb-0">rizanoesvan@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-box">
+                        <div class="feature-icon mx-auto"><i class="bi bi-whatsapp"></i></div>
+                        <h5>WhatsApp</h5>
+                        <p class="text-muted small mb-0">+62 812-3456-7890<br>Senin - Jumat, 09:00 - 17:00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+
+                    <div class="card border-0 p-4 mb-4">
+                        <h4 class="fw-bold mb-4 text-center">Kirim Pesan</h4>
+
+                        <div id="successAlert" class="alert alert-success d-none" role="alert">
+                            Pesan berhasil dikirim!
+                        </div>
+                        <div id="errorAlert" class="alert alert-danger d-none" role="alert">
+                            Terjadi kesalahan, silakan periksa isian Anda.
+                        </div>
+
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small">Nama Lengkap</label>
+                                    <input type="text" class="form-control" required>
+                                    <div class="invalid-feedback">Nama wajib diisi.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small">Email</label>
+                                    <input type="email" class="form-control" required>
+                                    <div class="invalid-feedback">Email tidak valid.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small">No. Telepon</label>
+                                    <input type="tel" class="form-control" required>
+                                    <div class="invalid-feedback">No. Telepon wajib diisi.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small">Subjek</label>
+                                    <select class="form-select" required>
+                                        <option value="" selected disabled>Pilih Subjek...</option>
+                                        <option value="project">Penawaran Proyek</option>
+                                        <option value="collab">Kolaborasi</option>
+                                        <option value="other">Lainnya</option>
+                                    </select>
+                                    <div class="invalid-feedback">Silakan pilih subjek.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small">Pesan</label>
+                                    <textarea class="form-control" rows="4" required></textarea>
+                                    <div class="invalid-feedback">Pesan tidak boleh kosong.</div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck"
+                                            required>
+                                        <label class="form-check-label small" for="invalidCheck">
+                                            I agree to terms and conditions
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            Anda harus menyetujui syarat dan ketentuan.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" id="submitBtn" class="btn btn-primary px-5 rounded-pill" disabled>
+                                        <i class="bi bi-send me-2"></i> Kirim Sekarang
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="map-container shadow-sm">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3100492018316!2d100.35260587496515!3d-0.9145678990766158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b8c060487079%3A0x23a35a7258384b6!2sUniversitas%20Andalas!5e0!3m2!1sid!2sid!4v1709600000000!5m2!1sid!2sid"
+                            allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-custom text-white py-4">
+        <div class="container">
+            <div class="row align-items-start gy-4">
+    
+                <div class="col-12 col-md-5">
+                    <p class="text-white-50 small mb-0 text-justify">
+                        Mahasiswa Unand yang memiliki ketertarikan dalam bidang teknologi dan keahlian di design serta
+                        pengembangan web menggunakan tools seperti HTML, CSS, Bootstrap dan Banyak Lagi. Terimakasih sudah
+                        mengunjungi laman saya.
+                    </p>
+                </div>
+    
+                <div class="col-12 col-md-4">
+                    <div class="row justify-content-md-end">
+                        <div class="col-6 col-md-auto d-flex flex-column gap-1">
+                            <a href="index.html" class="text-white-50 text-decoration-none">Home</a>
+                            <a href="about.html" class="text-white-50 text-decoration-none">About</a>
+                        </div>
+                        <div class="col-6 col-md-auto d-flex flex-column gap-1">
+                            <a href="portofolio.html" class="text-white-50 text-decoration-none">Portfolio</a>
+                            <a href="kontak.html" class="text-white-50 text-decoration-none">Contact</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-12 col-md-3 d-flex flex-column align-items-start align-items-md-end">
+                    <div class="d-flex gap-3">
+                        <a href="https://www.instagram.com/rizanoesvan/" target="_blank" class="text-white-50 fs-1"><i
+                                class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/feed/" target="_blank" class="text-white-50 fs-1"><i
+                                class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3 bg-white-50">
+            <div class="text-center text-white-50 small">
+                © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    </body>    
+</html>
