@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum - Rizan Oesvan Idrati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mt-5">
+
+        <div class="mb-4">
+            <a href="portofolio.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali ke Portofolio
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                        <h1 class="fw-bold">Laporan Praktikum Pemrograman Web: Migration, Seeding, Routing, Model, Controller, View</h1>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
+                    <p class="mb-1 text-justify">
+                        Praktikum ini bertujuan untuk memberikan pemahaman dan keterampilan fundamental kepada mahasiswa dalam membangun aplikasi web modern yang dinamis berbasis kerangka kerja PHP. Fokus utama pada modul ini adalah implementasi konsep arsitektur MVC (Model-View-Controller) secara utuh menggunakan Laravel. Pemahaman mengenai alur kerja kerangka kerja ini sangat penting karena Laravel menyediakan alat bawaan yang sangat terstruktur untuk menangani operasi basis data, rute aplikasi, dan penyajian antarmuka. Dengan mempraktikkan materi ini, mahasiswa diharapkan mampu membangun aplikasi operasi data dasar atau CRUD secara rapi dan mudah dipelihara pada tahap pengembangan lanjutan.
+                    </p>
+
+                    <div class="mb-5 text-justify">
+                        <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
+                        <ul>
+                            <li>Mengelola versi struktur basis data menggunakan fitur Migration dan mengisi data awal menggunakan Seeding.</li>
+                            <li>Mengatur pintu masuk aplikasi web menggunakan Routing serta membangun Model untuk interaksi langsung dengan basis data.</li>
+                            <li>Mengembangkan Controller sebagai pusat logika atau jembatan penghubung antara Model dan View.</li>
+                            <li>Membangun tampilan antarmuka halaman yang konsisten dan terstruktur menggunakan Blade Template Engine.</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah Kerja dan Implementasi</h4>
+                    <p class="mb-4">Berikut adalah penjelasan lengkap beserta tangkapan layar dari hasil eksekusi tahapan praktikum:</p>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Konfigurasi Database</h5>
+                        <p class="text-justify">
+                            Pada tahap awal pembuatan aplikasi Laravel, konfigurasi basis data merupakan langkah yang sangat krusial agar aplikasi dapat berinteraksi dengan server lokal. Konfigurasi ini dilakukan dengan memodifikasi file environment yang berada di direktori utama proyek. Pada file tersebut, pengaturan koneksi basis data disesuaikan dengan menetapkan jenis koneksi ke MySQL dan mengubah nama basis data menjadi praktikum_laravel. Proses ini memastikan bahwa seluruh operasi manipulasi data ke depannya dapat terhubung secara lancar dengan server MySQL yang sedang berjalan pada perangkat lokal.
+                        </p>
+                        <div class="text-center mt-4 mb-3">
+                            <img src="/images/gb1.png" class="img-fluid mb-2 w-75" alt="Screenshot Konfigurasi Database">
+                            <span class="text-muted small d-block">Gambar 2.1: Konfigurasi file environment untuk basis data</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Migration dan Seeding</h5>
+                        <p class="text-justify">
+                            Migration di Laravel bertindak sebagai pengendali versi untuk basis data yang memungkinkan pengembang merancang, mengubah, atau menghapus struktur tabel hanya menggunakan sintaks PHP tanpa harus menulis kueri SQL secara manual. Melalui perintah artisan di terminal, sebuah kerangka migrasi dibuat untuk tabel produk lengkap dengan tipe data kolomnya. Setelah tabel berhasil dieksekusi, tahap selanjutnya adalah proses Seeding yang difungsikan untuk mengisi tabel tersebut dengan data pengujian awal secara otomatis. File seeder dikonfigurasi untuk menyisipkan beberapa entitas produk ke dalam basis data sehingga saat aplikasi diakses, data tersebut langsung tersedia untuk ditampilkan.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/gb2.png" class="img-fluid mb-2" alt="Screenshot Migration">
+                                <span class="text-muted small d-block">Gambar 2.2: Eksekusi kode pembuatan Migration</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/gb5.png" class="img-fluid mb-2" alt="Screenshot Seeding">
+                                <span class="text-muted small d-block">Gambar 2.3: Injeksi data menggunakan Seeder</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Pengaturan Routing dan Model</h5>
+                        <p class="text-justify">
+                            Routing merupakan sistem pengarah utama di mana setiap alamat URL yang diakses oleh pengguna akan dipetakan ke respon atau logika tertentu di dalam aplikasi. Pada praktikum ini, implementasi rute dikonfigurasi menggunakan teknik resource route untuk secara otomatis menyiapkan jalur khusus operasi CRUD. Bersamaan dengan itu, Model dibentuk untuk menangani komunikasi langsung aplikasi dengan basis data memanfaatkan fitur Eloquent ORM. Model ini secara cerdas merepresentasikan tabel produk di basis data dan dilengkapi dengan properti khusus agar manipulasi penambahan atau perubahan data dapat dilakukan dengan cepat dan aman.
+                        </p>
+                        <div class="text-center mt-4 mb-3">
+                            <img src="/images/gb9.png" class="img-fluid mb-2 w-75" alt="Screenshot Routing dan Model">
+                            <span class="text-muted small d-block">Gambar 2.4: Konfigurasi Route dan struktur Model</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Pembuatan Controller dan View</h5>
+                        <p class="text-justify">
+                            Controller berfungsi sebagai pengelola utama logika aplikasi yang bertugas menerima permintaan pengguna, memanggil data yang diperlukan dari Model, dan mengirimkannya ke View untuk ditampilkan. Pada tahap ini, controller dibuat untuk memiliki fungsi fungsi standar seperti menampilkan data, memproses pembaruan, hingga menghapus data. Sementara itu, antarmuka pengguna direpresentasikan melalui View yang dibangun menggunakan Blade Template Engine. Fitur penataan letak dari Blade ini memungkinkan pembuatan satu kerangka halaman utama yang dapat digunakan kembali secara dinamis oleh halaman lain, sehingga penulisan kode tampilan web menjadi jauh lebih efisien, modular, dan terstruktur.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/gb13.png" class="img-fluid mb-2" alt="Screenshot Controller">
+                                <span class="text-muted small d-block">Gambar 2.5: Implementasi logika pada Controller</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/gb15.png" class="img-fluid mb-2" alt="Screenshot View">
+                                <span class="text-muted small d-block">Gambar 2.6: Tampilan data dinamis melalui View Blade</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">3. Kesimpulan</h4>
+                    <p class="mb-5 text-justify">
+                        Secara keseluruhan, praktikum ini membuktikan keandalan arsitektur MVC pada kerangka kerja Laravel dalam mempercepat siklus pengembangan aplikasi web. Pengelolaan skema basis data secara programmatic menggunakan Migration dan Seeding terbukti sangat memudahkan tim pengembang dalam membangun sistem. Selain itu, kolaborasi antara sistem Routing yang ringkas, Model Eloquent ORM yang cerdas, hingga fleksibilitas Blade Template Engine pada View menjadikan kode yang dihasilkan jauh lebih rapi, terorganisir, dan siap untuk dipelihara maupun ditingkatkan skalanya di masa mendatang.
+                    </p>
+                    
+                    <div class="mt-4 mb-3">
+                        <a href="https://github.com/RIZ4N/pweb_laravel" target="_blank" class="btn btn-dark btn-sm">
+                            <i class="bi bi-github"></i> View Repository
+                        </a>
+                    </div>
+
+                    <div>
+                        <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
+                        <span class="badge bg-danger me-1">HTML</span>
+                        <span class="badge bg-primary me-1">Laravel</span>
+                        <span class="badge bg-info text-dark">MySQL</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-custom bg-dark text-white py-4 mt-5">
+        <div class="container text-center text-white-50 small">
+            © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
