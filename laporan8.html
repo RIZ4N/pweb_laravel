@@ -44,88 +44,194 @@
 
                     <div class="text-center mb-5">
                         <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
-                        <h1 class="fw-bold">Laporan Praktikum Pemrograman Web: Migration, Seeding, Routing, Model, Controller, View</h1>
+                        <h1 class="fw-bold">Laporan Praktikum Pemrograman Web: Migration, Seeding, Routing, Model,
+                            Controller, View</h1>
                     </div>
 
                     <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
                     <p class="mb-1 text-justify">
-                        Praktikum ini bertujuan untuk memberikan pemahaman dan keterampilan fundamental kepada mahasiswa dalam membangun aplikasi web modern yang dinamis berbasis kerangka kerja PHP. Fokus utama pada modul ini adalah implementasi konsep arsitektur MVC (Model-View-Controller) secara utuh menggunakan Laravel. Pemahaman mengenai alur kerja kerangka kerja ini sangat penting karena Laravel menyediakan alat bawaan yang sangat terstruktur untuk menangani operasi basis data, rute aplikasi, dan penyajian antarmuka. Dengan mempraktikkan materi ini, mahasiswa diharapkan mampu membangun aplikasi operasi data dasar atau CRUD secara rapi dan mudah dipelihara pada tahap pengembangan lanjutan.
+                        Praktikum ini bertujuan untuk memberikan pemahaman dasar tentang cara membangun aplikasi web
+                        menggunakan framework PHP yaitu Laravel. Pada praktikum ini, fokus utamanya adalah menerapkan
+                        pola arsitektur MVC (Model-View-Controller). Mahasiswa akan mempelajari cara mengatur database
+                        melalui kode program, membuat rute untuk alamat web, hingga menghubungkan proses pengolahan data
+                        dengan tampilan halaman. Dengan memahami materi ini, mahasiswa diharapkan bisa membuat fitur
+                        manipulasi data (CRUD) dengan lebih rapi, terstruktur, dan mudah dikelola.
                     </p>
 
                     <div class="mb-5 text-justify">
                         <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
                         <ul>
-                            <li>Mengelola versi struktur basis data menggunakan fitur Migration dan mengisi data awal menggunakan Seeding.</li>
-                            <li>Mengatur pintu masuk aplikasi web menggunakan Routing serta membangun Model untuk interaksi langsung dengan basis data.</li>
-                            <li>Mengembangkan Controller sebagai pusat logika atau jembatan penghubung antara Model dan View.</li>
-                            <li>Membangun tampilan antarmuka halaman yang konsisten dan terstruktur menggunakan Blade Template Engine.</li>
+                            <li>Mengetahui cara mengatur tabel database menggunakan Migration dan mengisi data awal
+                                menggunakan Seeding.</li>
+                            <li>Memahami cara membuat rute aplikasi (Routing) dan Model untuk berinteraksi dengan
+                                database.</li>
+                            <li>Mampu membuat Controller sebagai penghubung antara data dan tampilan.</li>
+                            <li>Mampu menampilkan data ke halaman web menggunakan sistem Blade Template milik Laravel.
+                            </li>
                         </ul>
                     </div>
 
                     <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah Kerja dan Implementasi</h4>
-                    <p class="mb-4">Berikut adalah penjelasan lengkap beserta tangkapan layar dari hasil eksekusi tahapan praktikum:</p>
+                    <p class="mb-4">Berikut adalah langkah-langkah praktikum yang telah dilakukan beserta penjelasan
+                        dari gambar kode dan eksekusi programnya:</p>
 
                     <div class="mb-5">
                         <h5 class="fw-bold">A. Konfigurasi Database</h5>
                         <p class="text-justify">
-                            Pada tahap awal pembuatan aplikasi Laravel, konfigurasi basis data merupakan langkah yang sangat krusial agar aplikasi dapat berinteraksi dengan server lokal. Konfigurasi ini dilakukan dengan memodifikasi file environment yang berada di direktori utama proyek. Pada file tersebut, pengaturan koneksi basis data disesuaikan dengan menetapkan jenis koneksi ke MySQL dan mengubah nama basis data menjadi praktikum_laravel. Proses ini memastikan bahwa seluruh operasi manipulasi data ke depannya dapat terhubung secara lancar dengan server MySQL yang sedang berjalan pada perangkat lokal.
+                            Langkah pertama dalam membuat proyek Laravel adalah mengatur koneksi ke database. Pengaturan
+                            ini dilakukan dengan mengubah beberapa baris pada file konfigurasi bernama `.env`. Pada file
+                            tersebut, jenis koneksi dipastikan menggunakan `mysql`, dan nama database diubah menjadi
+                            `praktikum_laravel`. Konfigurasi ini sangat penting agar aplikasi Laravel bisa terhubung dan
+                            menyimpan data ke dalam database lokal kita.
                         </p>
                         <div class="text-center mt-4 mb-3">
-                            <img src="/images/gb1.png" class="img-fluid mb-2 w-75" alt="Screenshot Konfigurasi Database">
-                            <span class="text-muted small d-block">Gambar 2.1: Konfigurasi file environment untuk basis data</span>
+                            <img src="/images/gb1.png" class="img-fluid mb-2 w-75"
+                                alt="Screenshot Konfigurasi Database">
+                            <span class="text-muted small d-block">Gambar 2.1: Konfigurasi file .env untuk
+                                database</span>
                         </div>
                     </div>
 
                     <div class="mb-5">
-                        <h5 class="fw-bold">B. Migration dan Seeding</h5>
+                        <h5 class="fw-bold">B. Pembuatan Migration</h5>
                         <p class="text-justify">
-                            Migration di Laravel bertindak sebagai pengendali versi untuk basis data yang memungkinkan pengembang merancang, mengubah, atau menghapus struktur tabel hanya menggunakan sintaks PHP tanpa harus menulis kueri SQL secara manual. Melalui perintah artisan di terminal, sebuah kerangka migrasi dibuat untuk tabel produk lengkap dengan tipe data kolomnya. Setelah tabel berhasil dieksekusi, tahap selanjutnya adalah proses Seeding yang difungsikan untuk mengisi tabel tersebut dengan data pengujian awal secara otomatis. File seeder dikonfigurasi untuk menyisipkan beberapa entitas produk ke dalam basis data sehingga saat aplikasi diakses, data tersebut langsung tersedia untuk ditampilkan.
+                            Migration digunakan untuk membuat struktur tabel database langsung melalui kode PHP,
+                            sehingga kita tidak perlu membuatnya secara manual. Pada praktikum ini, kita membuat file
+                            migration untuk tabel `products`. Di dalam kodenya, ditambahkan beberapa kolom yang
+                            dibutuhkan, yaitu kolom `name` dengan tipe string untuk nama produk, `price` dengan tipe
+                            integer untuk harga, dan `description` dengan tipe teks untuk deskripsi produk. Perintah
+                            `timestamps()` juga otomatis ditambahkan untuk mencatat kapan data dibuat dan diperbarui.
+                        </p>
+                        <div class="text-center mt-4 mb-3">
+                            <img src="/images/gb3.png" class="img-fluid mb-2 w-75" alt="Screenshot Migration">
+                            <span class="text-muted small d-block">Gambar 2.2: Kode pembuatan kolom pada file
+                                Migration</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Membuat Data Awal (Seeding)</h5>
+                        <p class="text-justify">
+                            Setelah tabel selesai dibuat, kita membutuhkan data contoh (dummy) untuk menguji aplikasi.
+                            Hal ini dilakukan menggunakan fitur Seeding. Pertama, kita membuat file seeder dengan
+                            mengetikkan perintah `php artisan make:seeder` di terminal. Setelah file seeder berhasil
+                            dibuat, kita menuliskan kode menggunakan `DB::table()->insert()` untuk memasukkan beberapa
+                            data produk secara langsung beserta atributnya seperti nama barang dan harga.
                         </p>
                         <div class="row justify-content-center mt-3 mb-4">
                             <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb2.png" class="img-fluid mb-2" alt="Screenshot Migration">
-                                <span class="text-muted small d-block">Gambar 2.2: Eksekusi kode pembuatan Migration</span>
+                                <img src="/images/gb5.png" class="img-fluid mb-2" alt="Screenshot Perintah Seeder">
+                                <span class="text-muted small d-block">Gambar 2.3: Perintah membuat file Seeder di
+                                    terminal</span>
                             </div>
                             <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb5.png" class="img-fluid mb-2" alt="Screenshot Seeding">
-                                <span class="text-muted small d-block">Gambar 2.3: Injeksi data menggunakan Seeder</span>
+                                <img src="/images/gb6.png" class="img-fluid mb-2" alt="Screenshot Kode Seeder">
+                                <span class="text-muted small d-block">Gambar 2.4: Kode untuk menambahkan data produk
+                                    pada Seeder</span>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mb-5">
-                        <h5 class="fw-bold">C. Pengaturan Routing dan Model</h5>
                         <p class="text-justify">
-                            Routing merupakan sistem pengarah utama di mana setiap alamat URL yang diakses oleh pengguna akan dipetakan ke respon atau logika tertentu di dalam aplikasi. Pada praktikum ini, implementasi rute dikonfigurasi menggunakan teknik resource route untuk secara otomatis menyiapkan jalur khusus operasi CRUD. Bersamaan dengan itu, Model dibentuk untuk menangani komunikasi langsung aplikasi dengan basis data memanfaatkan fitur Eloquent ORM. Model ini secara cerdas merepresentasikan tabel produk di basis data dan dilengkapi dengan properti khusus agar manipulasi penambahan atau perubahan data dapat dilakukan dengan cepat dan aman.
-                        </p>
-                        <div class="text-center mt-4 mb-3">
-                            <img src="/images/gb9.png" class="img-fluid mb-2 w-75" alt="Screenshot Routing dan Model">
-                            <span class="text-muted small d-block">Gambar 2.4: Konfigurasi Route dan struktur Model</span>
-                        </div>
-                    </div>
-
-                    <div class="mb-5">
-                        <h5 class="fw-bold">D. Pembuatan Controller dan View</h5>
-                        <p class="text-justify">
-                            Controller berfungsi sebagai pengelola utama logika aplikasi yang bertugas menerima permintaan pengguna, memanggil data yang diperlukan dari Model, dan mengirimkannya ke View untuk ditampilkan. Pada tahap ini, controller dibuat untuk memiliki fungsi fungsi standar seperti menampilkan data, memproses pembaruan, hingga menghapus data. Sementara itu, antarmuka pengguna direpresentasikan melalui View yang dibangun menggunakan Blade Template Engine. Fitur penataan letak dari Blade ini memungkinkan pembuatan satu kerangka halaman utama yang dapat digunakan kembali secara dinamis oleh halaman lain, sehingga penulisan kode tampilan web menjadi jauh lebih efisien, modular, dan terstruktur.
+                            Untuk menjalankan file seeder dan memasukkan data tersebut ke dalam database, kita
+                            menggunakan perintah `php artisan db:seed`. Selain itu, Laravel juga menyediakan perintah
+                            yang sangat praktis yaitu `php artisan migrate:fresh --seed`. Perintah ini berfungsi ganda,
+                            yaitu menghapus semua tabel lama, membuat tabel ulang dari awal berdasarkan migration, lalu
+                            langsung mengisinya dengan data dari seeder.
                         </p>
                         <div class="row justify-content-center mt-3 mb-4">
                             <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb13.png" class="img-fluid mb-2" alt="Screenshot Controller">
-                                <span class="text-muted small d-block">Gambar 2.5: Implementasi logika pada Controller</span>
+                                <img src="/images/gb7.png" class="img-fluid mb-2" alt="Screenshot Jalankan Seeder">
+                                <span class="text-muted small d-block">Gambar 2.5: Eksekusi perintah db:seed berjalan
+                                    sukses</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/gb8.png" class="img-fluid mb-2" alt="Screenshot Refresh Seeder">
+                                <span class="text-muted small d-block">Gambar 2.6: Proses reset database sekaligus
+                                    mengisi data seeder</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Pengaturan Alamat Web (Routing)</h5>
+                        <p class="text-justify">
+                            Routing berfungsi untuk mengatur setiap alamat link (URL) yang diketik oleh pengguna agar
+                            diarahkan ke halaman yang benar. Semua konfigurasi rute ini diletakkan pada file
+                            `routes/web.php`. Pada kode di bawah, kita membuat beberapa tipe rute. Mulai dari rute biasa
+                            yang mengembalikan teks langsung, rute dengan parameter ID untuk menampilkan data spesifik,
+                            hingga rute jenis *resource* yang secara otomatis akan membuat semua jalur URL yang
+                            diperlukan untuk fitur pengolahan data (CRUD).
+                        </p>
+                        <div class="text-center mt-4 mb-3">
+                            <img src="/images/gb9.png" class="img-fluid mb-2 w-75" alt="Screenshot Routing">
+                            <span class="text-muted small d-block">Gambar 2.7: Konfigurasi bermacam tipe rute di
+                                web.php</span>
+                        </div>
+
+                        <p class="text-justify">
+                            Selain rute biasa, kita juga menggunakan fitur *Route Group* dengan tambahan penamaan
+                            *prefix*. Fitur ini digunakan untuk mengelompokkan URL. Pada contoh ini, kita mengelompokkan
+                            rute untuk bagian admin. Dengan begitu, setiap rute yang berada di dalam grup ini otomatis
+                            akan memiliki awalan '/admin' pada alamat webnya (misalnya `/admin/dashboard`). Hal ini
+                            membuat penulisan kode rute menjadi lebih rapi dan terorganisir.
+                        </p>
+                        <div class="text-center mt-4 mb-3">
+                            <img src="/images/gb11.png" class="img-fluid mb-2 w-75" alt="Screenshot Route Group">
+                            <span class="text-muted small d-block">Gambar 2.8: Pengelompokan rute menggunakan
+                                prefix</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">E. Konfigurasi Model</h5>
+                        <p class="text-justify">
+                            Model adalah bagian yang bertugas secara langsung untuk mengambil dan memproses data dari
+                            tabel database. Pada file `Product.php`, kita perlu menambahkan variabel `protected
+                            $fillable`. Fungsi dari kode ini adalah sebagai sistem keamanan untuk menentukan kolom tabel
+                            apa saja yang diizinkan untuk menerima inputan atau diisi secara massal oleh pengguna,
+                            seperti nama produk, harga, dan deskripsinya.
+                        </p>
+                        <div class="text-center mt-4 mb-3">
+                            <img src="/images/gb10.png" class="img-fluid mb-2 w-75" alt="Screenshot Model">
+                            <span class="text-muted small d-block">Gambar 2.9: Pengaturan izin kolom pada file
+                                Model</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">F. Pembuatan Controller dan Tampilan (View)</h5>
+                        <p class="text-justify">
+                            Controller berperan sebagai otak atau pengatur alur dari sebuah halaman. Controller dibuat
+                            dengan menggunakan perintah `php artisan make:controller` di terminal. Setelah dibuat,
+                            controller inilah yang akan menerima permintaan dari rute, memanggil data dari Model, dan
+                            mengirim data tersebut ke halaman depan. Halaman depan ini disebut View, yang dibuat
+                            menggunakan file dengan akhiran `.blade.php`. Fitur Blade memudahkan kita untuk menampilkan
+                            data dari controller secara dinamis ke dalam kode HTML dasar.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/gb12.png" class="img-fluid mb-2" alt="Screenshot Controller Command">
+                                <span class="text-muted small d-block">Gambar 2.10: Perintah pembuatan file
+                                    Controller</span>
                             </div>
                             <div class="col-md-6 text-center mb-3">
                                 <img src="/images/gb15.png" class="img-fluid mb-2" alt="Screenshot View">
-                                <span class="text-muted small d-block">Gambar 2.6: Tampilan data dinamis melalui View Blade</span>
+                                <span class="text-muted small d-block">Gambar 2.11: Hasil tampilan halaman web
+                                    menggunakan View</span>
                             </div>
                         </div>
                     </div>
 
                     <h4 class="fw-bold text-primary border-bottom pb-2">3. Kesimpulan</h4>
                     <p class="mb-5 text-justify">
-                        Secara keseluruhan, praktikum ini membuktikan keandalan arsitektur MVC pada kerangka kerja Laravel dalam mempercepat siklus pengembangan aplikasi web. Pengelolaan skema basis data secara programmatic menggunakan Migration dan Seeding terbukti sangat memudahkan tim pengembang dalam membangun sistem. Selain itu, kolaborasi antara sistem Routing yang ringkas, Model Eloquent ORM yang cerdas, hingga fleksibilitas Blade Template Engine pada View menjadikan kode yang dihasilkan jauh lebih rapi, terorganisir, dan siap untuk dipelihara maupun ditingkatkan skalanya di masa mendatang.
+                        Melalui praktikum ini, dapat disimpulkan bahwa penggunaan pola MVC (Model-View-Controller) pada
+                        Laravel sangat mempermudah proses pembuatan website. Fitur Migration dan Seeding membuat
+                        manajemen database menjadi lebih praktis tanpa harus membuka database manager secara manual.
+                        Pemisahan fungsi antara pengelolaan rute (Routing), pengolahan data (Model), logika program
+                        (Controller), dan tampilan layar (View) membuat penulisan program menjadi lebih bersih, mudah
+                        dipahami, dan memudahkan ketika ada penambahan fitur nantinya.
                     </p>
-                    
+
                     <div class="mt-4 mb-3">
                         <a href="https://github.com/RIZ4N/pweb_laravel" target="_blank" class="btn btn-dark btn-sm">
                             <i class="bi bi-github"></i> View Repository
