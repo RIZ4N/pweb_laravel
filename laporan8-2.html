@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum - Rizan Oesvan Idrati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mt-5">
+
+        <div class="mb-4">
+            <a href="portofolio.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali ke Portofolio
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                        <h1 class="fw-bold">Laporan Praktikum Pemrograman Web: Laravel Relationship</h1>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
+                    <p class="mb-1 text-justify">
+                        Praktikum ini berfokus pada pembuatan sistem akademik sederhana untuk memahami secara mendalam
+                        tentang konsep relasi antar tabel pada database menggunakan framework Laravel. Dalam membangun
+                        aplikasi yang nyata, data yang kita miliki jarang sekali berdiri sendiri pada satu tabel saja.
+                        Oleh karena itu, kita membangun hubungan antara tabel mahasiswa, tabel jurusan, dan tabel mata
+                        kuliah. Melalui pemahaman materi relasi ini, kita dapat menghubungkan berbagai data yang
+                        terpisah tersebut menjadi satu kesatuan informasi yang utuh dan sangat mudah dikelola melalui
+                        fitur yang sudah disediakan oleh Laravel.
+                    </p>
+
+                    <div class="mb-5 text-justify">
+                        <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
+                        <ul>
+                            <li>Memahami konsep dasar relationship atau relasi tabel di dalam Laravel.</li>
+                            <li>Mengimplementasikan relasi jenis One to Many dan Many to Many.</li>
+                            <li>Membuat file migration yang dilengkapi dengan kunci tamu (foreign key).</li>
+                            <li>Menggunakan fitur Eloquent dari Laravel untuk melakukan query pemanggilan data.</li>
+                            <li>Menampilkan data gabungan hasil relasi ke halaman antarmuka website.</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">2. Tahapan Kerja dan Implementasi</h4>
+                    <p class="mb-4">Berikut adalah penjabaran lengkap dari setiap tahapan praktikum yang telah dilakukan
+                        beserta penjelasan detail mengenai fungsi dari perintah dan kode programnya:</p>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Migrasi Tabel Jurusan</h5>
+                        <p class="text-justify">
+                            Tahapan paling awal dalam membuat database yang saling berelasi adalah membuat tabel induk
+                            yang posisinya tidak bergantung pada tabel lain. Tabel jurusan ini bertindak sebagai tabel
+                            induk pertama. Kita memulai dengan menjalankan perintah artisan make migration di dalam
+                            terminal untuk menciptakan file struktur tabel jurusan. Setelah file tersebut tercipta, kita
+                            membuka kodenya dan menambahkan kolom nama jurusan yang menggunakan tipe data string. Tabel
+                            ini sengaja dibuat pertama kali karena nantinya data dari tabel jurusan ini akan ditarik dan
+                            dirujuk oleh tabel mahasiswa.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g1.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Perintah Migration Majors">
+                                <span class="text-muted small d-block">Gambar 2.1: Perintah membuat file migrasi jurusan
+                                    di terminal</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g2.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Kode Migration Majors">
+                                <span class="text-muted small d-block">Gambar 2.2: Kode migrasi untuk merancang struktur
+                                    tabel jurusan</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Migrasi Tabel Mahasiswa</h5>
+                        <p class="text-justify">
+                            Setelah tabel induk selesai dibuat, kita melanjutkannya dengan membuat file migrasi untuk
+                            tabel mahasiswa. Tabel mahasiswa ini memiliki hubungan relasi dengan tabel jurusan dengan
+                            jenis relasi banyak ke satu. Artinya banyak mahasiswa bisa tergabung ke dalam satu jurusan
+                            yang sama. Oleh karena itu pada kode migrasinya, selain kita menambahkan kolom identitas
+                            diri seperti nama dan Nomor Induk Mahasiswa, kita juga wajib menambahkan sebuah kolom
+                            foreign key bernama major id. Kolom inilah yang akan bertugas menyimpan nomor urut jurusan
+                            dan menghubungkan identitas mahasiswa tersebut secara langsung dengan tabel jurusan yang
+                            sudah kita buat sebelumnya.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g3.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Perintah Migration Students">
+                                <span class="text-muted small d-block">Gambar 2.3: Perintah pembuatan file migrasi
+                                    mahasiswa di terminal</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g4.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Kode Migration Students">
+                                <span class="text-muted small d-block">Gambar 2.4: Kode migrasi penambahan foreign key
+                                    menuju tabel jurusan</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Migrasi Tabel Mata Kuliah</h5>
+                        <p class="text-justify">
+                            Tahapan ketiga adalah mempersiapkan wadah untuk menampung seluruh daftar mata kuliah. Serupa
+                            dengan langkah awal tadi, file migrasi baru dibuat melalui pengetikan perintah di terminal.
+                            Pada bagian pengisian kode migrasinya, kita cukup mendefinisikan kolom untuk menampung nama
+                            mata kuliah serta sebuah kolom tambahan bertipe data angka bulat untuk menyimpan jumlah
+                            Satuan Kredit Semester. Tabel mata kuliah ini dirancang untuk berdiri sendiri terlebih
+                            dahulu sebelum nantinya dihubungkan dengan para mahasiswa yang memilih kelas tersebut pada
+                            tahap berikutnya.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g5.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Perintah Migration Subjects">
+                                <span class="text-muted small d-block">Gambar 2.5: Perintah pembuatan file migrasi mata
+                                    kuliah</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g6.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Kode Migration Subjects">
+                                <span class="text-muted small d-block">Gambar 2.6: Kode migrasi penambahan kolom nama
+                                    dan satuan kredit semester</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Migrasi Tabel Perantara</h5>
+                        <p class="text-justify">
+                            Karena satu mahasiswa bisa mengambil banyak pilihan mata kuliah dan satu mata kuliah juga
+                            bisa diambil oleh banyak peserta mahasiswa, maka kita dihadapkan pada jenis relasi banyak ke
+                            banyak. Sistem database mewajibkan kita untuk membuat sebuah tabel perantara khusus guna
+                            menjembatani relasi yang rumit ini. Tabel perantara ini diberi nama gabungan yaitu tabel
+                            student subject. Di dalam susunan kodenya kita hanya perlu memasukkan dua kolom rujukan
+                            utama yaitu kolom yang memuat ID dari tabel mahasiswa dan kolom yang memuat ID dari tabel
+                            mata kuliah. Kita juga menambahkan satu baris aturan kode unik pada kedua kolom tersebut
+                            untuk menolak masuknya data kembar jika ada seorang mahasiswa yang mendaftarkan kelas yang
+                            persis sama dua kali.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g7.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Perintah Migration Pivot">
+                                <span class="text-muted small d-block">Gambar 2.7: Perintah pembuatan file migrasi tabel
+                                    perantara</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g10.png" class="img-fluid mb-2 border rounded"
+                                    alt="Screenshot Kode Migration Pivot">
+                                <span class="text-muted small d-block">Gambar 2.8: Kode tabel perantara dengan tambahan
+                                    sistem pencegahan data ganda</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">E. Pembuatan Model dan Definisi Relasi</h5>
+                        <p class="text-justify">
+                            Setelah struktur tabel di dalam database rampung dikerjakan, langkah selanjutnya adalah
+                            menciptakan file Model untuk tiap tabel tersebut. Model ini bertugas memberitahu bahasa
+                            pemrograman PHP mengenai hubungan apa saja yang terjalin antar tabel. Pada model jurusan,
+                            kita menyisipkan fungsi yang memberitahu bahwa jurusan ini memiliki banyak mahasiswa melalui
+                            tipe relasi hasMany. Selanjutnya pada model mahasiswa, kita membuat fungsi kebalikan yang
+                            menandakan bahwa ia merupakan bagian dari sebuah jurusan menggunakan relasi belongsTo.
+                            Selain itu pada model mahasiswa juga ditambahkan fungsi relasi belongsToMany yang mengarah
+                            kepada model mata kuliah. Seluruh file model ini turut diamankan dengan mendaftarkan nama
+                            kolom yang diizinkan untuk menerima inputan data dari pengguna.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g9.png" class="img-fluid mb-2 border rounded"
+                                    alt="Perintah Model Major">
+                                <span class="text-muted small d-block">Gambar 2.9: Perintah pembuatan model
+                                    jurusan</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g11.png" class="img-fluid mb-2 border rounded" alt="Kode Model Major">
+                                <span class="text-muted small d-block">Gambar 2.10: Penulisan fungsi relasi yang
+                                    mengarah ke tabel anak</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g12.png" class="img-fluid mb-2 border rounded"
+                                    alt="Perintah Model Student">
+                                <span class="text-muted small d-block">Gambar 2.11: Perintah pembuatan model
+                                    mahasiswa</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g13.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Model Student">
+                                <span class="text-muted small d-block">Gambar 2.12: Penulisan kombinasi dua buah relasi
+                                    pada model mahasiswa</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g14.png" class="img-fluid mb-2 border rounded"
+                                    alt="Perintah Model Subject">
+                                <span class="text-muted small d-block">Gambar 2.13: Perintah pembuatan model mata
+                                    kuliah</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g15.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Model Subject">
+                                <span class="text-muted small d-block">Gambar 2.14: Penulisan relasi banyak ke banyak
+                                    pada model mata kuliah</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">F. Persiapan Data Awal Menggunakan Seeder</h5>
+                        <p class="text-justify">
+                            Supaya aplikasi bisa langsung diuji coba dengan data yang menyerupai kondisi asli, kita
+                            memanfaatkan fitur pengisi data otomatis bernama Seeder. Pada file pengisi data jurusan dan
+                            mata kuliah, kita menuliskan daftar program studi beserta beban SKS ke dalam format himpunan
+                            array. Data tersebut lalu dimasukkan secara otomatis menggunakan fungsi perulangan. Bagian
+                            paling menarik berada pada file pengisi data mahasiswa, karena selain menyimpan profil
+                            lengkap mahasiswa, skrip ini turut ditugaskan untuk memilih rentetan mata kuliah secara
+                            acak. Pilihan mata kuliah acak tersebut langsung diikatkan kepada identitas mahasiswa dengan
+                            memanggil fungsi tempel bernama attach. Terakhir semua susunan kelas pengisi data ini
+                            disatukan ke dalam satu file pemanggil utama agar siap dieksekusi secara serentak pada
+                            terminal.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g16.png" class="img-fluid mb-2 border rounded"
+                                    alt="Perintah Major Seeder">
+                                <span class="text-muted small d-block">Gambar 2.15: Perintah pembuatan seeder
+                                    jurusan</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g17.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Major Seeder">
+                                <span class="text-muted small d-block">Gambar 2.16: Skrip penyimpanan data barisan
+                                    jurusan melalui perulangan</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g18.png" class="img-fluid mb-2 border rounded"
+                                    alt="Perintah Subject Seeder">
+                                <span class="text-muted small d-block">Gambar 2.17: Perintah pembuatan seeder mata
+                                    kuliah</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g19.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Subject Seeder">
+                                <span class="text-muted small d-block">Gambar 2.18: Skrip pendataan nama mata kuliah
+                                    beserta nominal SKS</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g20.png" class="img-fluid mb-2 border rounded"
+                                    alt="Perintah Student Seeder">
+                                <span class="text-muted small d-block">Gambar 2.19: Perintah pembuatan seeder
+                                    mahasiswa</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g21.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Student Seeder">
+                                <span class="text-muted small d-block">Gambar 2.20: Skrip pemilihan kombinasi mata
+                                    kuliah secara acak bagi mahasiswa</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g22.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Database Seeder">
+                                <span class="text-muted small d-block">Gambar 2.21: Kompilasi pendaftaran pemanggilan
+                                    seeder pada file utama</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g23.png" class="img-fluid mb-2 border rounded" alt="Eksekusi DB Seed">
+                                <span class="text-muted small d-block">Gambar 2.22: Hasil laporan dari eksekusi serentak
+                                    seluruh skrip pengisian data</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">G. Perancangan Logika pada Controller</h5>
+                        <p class="text-justify">
+                            Langkah esensial sesudah pendataan selesai adalah mengatur lalu lintas data menggunakan file
+                            Controller. Saat memanggil data mahasiswa untuk ditampilkan ke layar, kita menggunakan
+                            teknik cerdas bernama Eager Loading. Teknik ini difungsikan agar data jurusan beserta
+                            kumpulan data mata kuliah ditarik dalam satu kali kerja saja sehingga database tidak merasa
+                            terbebani. Pada fungsi untuk menyimpan data peserta baru, pengontrol akan menampung seluruh
+                            isian dari form, mengecek kebenarannya, menyimpan ke tabel mahasiswa, lalu mengaitkan
+                            deretan mata kuliah yang dicentang ke dalam tabel perantara menggunakan fungsi attach.
+                            Sedangkan pada saat pengguna ingin mengedit profil mahasiswa, pengontrol menggunakan fungsi
+                            pintar bernama sync yang akan otomatis menghapus catatan mata kuliah lama dan menggantinya
+                            dengan susunan mata kuliah yang baru saja dipilih.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-12 text-center mb-4">
+                                <img src="/images/g24.png" class="img-fluid mb-2 border rounded"
+                                    alt="Perintah Controller">
+                                <span class="text-muted small d-block">Gambar 2.23: Pembuatan file pengontrol utama
+                                    untuk halaman mahasiswa</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g25.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Controller Atas">
+                                <span class="text-muted small d-block">Gambar 2.24: Penulisan fungsi pemuatan data
+                                    gabungan dan fungsi penambahan peserta</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g26.png" class="img-fluid mb-2 border rounded"
+                                    alt="Kode Controller Bawah">
+                                <span class="text-muted small d-block">Gambar 2.25: Penulisan fungsi pembaruan rekaman
+                                    serta penghapusan data relasi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">H. Pendaftaran Rute dan Perancangan Tampilan Web</h5>
+                        <p class="text-justify">
+                            Untuk menjamin seluruh fungsi di dalam pengontrol tadi dapat diakses dari browser, kita
+                            diwajibkan mendaftarkan rutenya. Penggunaan format rute resource sangat menghemat waktu
+                            karena semua kombinasi alamat URL untuk kebutuhan manipulasi data akan disediakan secara
+                            otomatis. Selanjutnya untuk mendesain wajah aplikasi, kita merakit satu file tampilan induk
+                            bernama app blade php yang sudah disuntikkan dengan komponen desain Bootstrap. Halaman
+                            penyaji tabel dirancang secara teliti dengan menambahkan perulangan bersarang di dalam
+                            struktur kolom tabelnya agar daftar panjang mata kuliah bisa disulap menjadi deretan label
+                            warna yang sedap dipandang. Halaman untuk mendaftar mahasiswa baru juga dirancang menjadi
+                            sebuah form yang dinamis dimana kotak isian jurusan disajikan dalam bentuk pilihan menu
+                            tarik turun sementara daftar mata kuliah disajikan melalui form centang yang lebih
+                            bersahabat dengan pengguna.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g27.png" class="img-fluid mb-2 border rounded" alt="Kode Routing">
+                                <span class="text-muted small d-block">Gambar 2.26: Konfigurasi jalur rute serba guna
+                                    untuk operasi database</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g28.png" class="img-fluid mb-2 border rounded" alt="Kode View Layout">
+                                <span class="text-muted small d-block">Gambar 2.27: Kode penyusunan kerangka desain
+                                    induk antarmuka halaman</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g29.png" class="img-fluid mb-2 border rounded" alt="Kode View Index">
+                                <span class="text-muted small d-block">Gambar 2.28: Kode penyusunan tabel penampil data
+                                    keseluruhan secara perulangan</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g30.png" class="img-fluid mb-2 border rounded" alt="Kode View Create">
+                                <span class="text-muted small d-block">Gambar 2.29: Kode perancangan kotak isian
+                                    formulir penambahan peserta baru</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">I. Pengujian Antarmuka Aplikasi</h5>
+                        <p class="text-justify">
+                            Tahap pembuktian akhir dilakukan dengan membuka aplikasi tersebut melalui browser. Layar
+                            akan langsung menampilkan sebuah tabel lebar yang sangat rapi memuat kolom nama jurusan dari
+                            tabel sebelah serta menampilkan setiap mata kuliah ke dalam bentuk label berwarna abu-abu
+                            beserta penjumlahan angka total SKS nya. Apabila tombol tambah disentuh, pengguna akan
+                            diarahkan menuju halaman pendaftaran yang sangat rapi. Apabila seluruh proses pendaftaran
+                            berhasil disimpan tanpa kendala, sistem dengan sendirinya memulangkan pengguna menuju daftar
+                            tabel dan menyematkan satu kotak notifikasi keberhasilan yang menyejukkan mata. Pengujian
+                            mendalam pada fitur membaca riwayat utuh seorang mahasiswa maupun upaya untuk merombak
+                            susunan data lamanya turut membuktikan bahwa seluruh intruksi yang dititipkan pada bagian
+                            pengontrol berhasil tereksekusi dengan ketelitian yang tinggi.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-12 text-center mb-4">
+                                <img src="/images/g31.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="UI Index Mahasiswa">
+                                <span class="text-muted small d-block">Gambar 2.30: Antarmuka utama halaman tabel
+                                    rekapitulasi daftar mahasiswa</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g32.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="UI Tambah Mahasiswa">
+                                <span class="text-muted small d-block">Gambar 2.31: Tampilan halaman form isian khusus
+                                    penambahan mahasiswa baru</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/g33.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="UI Notifikasi Sukses">
+                                <span class="text-muted small d-block">Gambar 2.32: Tampilan kotak pemberitahuan
+                                    bahwasanya penyimpanan berjalan sukses</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g34.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="UI Detail Mahasiswa">
+                                <span class="text-muted small d-block">Gambar 2.33: Tampilan halaman saat melihat
+                                    rincian detail profil setiap mahasiswa</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="/images/g35.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="UI Edit Mahasiswa">
+                                <span class="text-muted small d-block">Gambar 2.34: Tampilan formulir untuk memperbarui
+                                    atau mengoreksi data lama</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">J. Latihan Penerapan Kueri Pemanggilan Data</h5>
+                        <p class="text-justify">
+                            Pada tahapan kueri pertama, penarikan data berhasil mengambil seluruh nama peserta lengkap
+                            membawa atribut jurusan beserta mata kuliahnya tanpa ada bagian yang cacat. Pada pengujian
+                            kueri kedua, fokus diarahkan pada perhitungan matematis untuk memunculkan nama jurusan yang
+                            paling banyak digemari atau paling padat penduduknya. Latihan ketiga menyajikan praktik
+                            filterasi pencarian yang hanya akan memuntahkan daftar mata kuliah milik satu sampel nama
+                            mahasiswa yang diincar. Pada latihan pamungkas, implementasi kueri dirancang secara brilian
+                            untuk mengakumulasi setiap digit angka Satuan Kredit Semester secara akurat untuk tiap
+                            individu mahasiswa.
+                        </p>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-12 text-center mb-4">
+                                <img src="/images/l1.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="Latihan Query 1">
+                                <span class="text-muted small d-block">Gambar 2.35: Hasil tangkapan kueri pertama
+                                    menampilkan relasi keseluruhan anggota</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/l2.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="Latihan Query 2">
+                                <span class="text-muted small d-block">Gambar 2.36: Hasil tangkapan kueri kedua memilah
+                                    populasi jurusan terbanyak</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-4">
+                                <img src="/images/l3.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="Latihan Query 3">
+                                <span class="text-muted small d-block">Gambar 2.37: Hasil tangkapan kueri ketiga
+                                    membidik informasi riwayat studi secara personal</span>
+                            </div>
+                            <div class="col-12 text-center mb-3">
+                                <img src="/images/l4.png" class="img-fluid mb-2 border rounded shadow-sm"
+                                    alt="Latihan Query 4">
+                                <span class="text-muted small d-block">Gambar 2.38: Hasil tangkapan kueri keempat memuat
+                                    kalkulasi bersih nilai Satuan Kredit Semester</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">3. Kesimpulan</h4>
+                    <p class="mb-5 text-justify">
+                        Berdasarkan hasil praktikum yang telah dilakukan, dapat disimpulkan bahwa penggunaan model pada
+                        framework Laravel mempermudah pengelolaan relasi antar tabel dalam database. Pembuatan struktur
+                        database melalui migration, pengisian data awal menggunakan seeder, serta pengambilan data
+                        melalui model dapat dilakukan dengan lebih efisien dibandingkan menggunakan query database
+                        secara langsung. Selain itu, kode program menjadi lebih terstruktur, mudah dipelihara, dan lebih
+                        mudah dikembangkan untuk penambahan fitur di masa mendatang.
+
+                    </p>
+
+                    <div class="mt-4 mb-3">
+                        <a href="https://github.com/RIZ4N/pweb" target="_blank" class="btn btn-dark btn-sm">
+                            <i class="bi bi-github"></i> View Repository
+                        </a>
+                    </div>
+
+                    <div>
+                        <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
+                        <span class="badge bg-danger me-1">HTML</span>
+                        <span class="badge bg-primary me-1">Laravel</span>
+                        <span class="badge bg-info text-dark">MySQL</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-custom bg-dark text-white py-4 mt-5">
+        <div class="container text-center text-white-50 small">
+            © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
