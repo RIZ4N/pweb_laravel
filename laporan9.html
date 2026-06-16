@@ -8,9 +8,103 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <style>
+        .code-window {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            margin: 1.25rem 0;
+        }
+
+        .code-window-titlebar {
+            background-color: #3a3a3a;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .code-window-titlebar .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-red    { background-color: #ff5f57; }
+        .dot-yellow { background-color: #febc2e; }
+        .dot-green  { background-color: #28c840; }
+
+        .code-window-titlebar .filename {
+            color: #ccc;
+            font-size: 0.78rem;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: monospace;
+        }
+
+        .code-window pre {
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .code-window pre code {
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .img-placeholder {
+            background-color: #e9ecef;
+            border: 2px dashed #adb5bd;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            color: #6c757d;
+            cursor: pointer;
+            transition: background 0.2s;
+            min-height: 180px;
+            position: relative;
+        }
+
+        .img-placeholder:hover {
+            background-color: #dee2e6;
+        }
+
+        .img-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            color: #adb5bd;
+        }
+
+        .img-placeholder input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+        .img-preview {
+            display: none;
+            width: 100%;
+            border-radius: 8px;
+            object-fit: contain;
+            max-height: 400px;
+        }
+
+        .image-wrapper {
+            position: relative;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -44,192 +138,686 @@
 
                     <div class="text-center mb-5">
                         <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
-                        <h1 class="fw-bold">Laporan Praktikum Pemrograman Web: Migration, Seeding, Routing, Model,
-                            Controller, View</h1>
+                        <h1 class="fw-bold">Laporan Praktikum Pemrograman Web: Laravel UI Bootstrap, Templating, dan Manajemen Users (CRUD)</h1>
                     </div>
 
                     <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
                     <p class="mb-1 text-justify">
-                        Praktikum ini bertujuan untuk memberikan pemahaman dasar tentang cara membangun aplikasi web
-                        menggunakan framework PHP yaitu Laravel. Pada praktikum ini, fokus utamanya adalah menerapkan
-                        pola arsitektur MVC (Model-View-Controller). Mahasiswa akan mempelajari cara mengatur database
-                        melalui kode program, membuat rute untuk alamat web, hingga menghubungkan proses pengolahan data
-                        dengan tampilan halaman. Dengan memahami materi ini, mahasiswa diharapkan bisa membuat fitur
-                        manipulasi data (CRUD) dengan lebih rapi, terstruktur, dan mudah dikelola.
+                        Praktikum ini merupakan kelanjutan dari modul sebelumnya yang membahas pembuatan proyek Laravel dasar. Pada sesi ini, fokus utama adalah membangun sistem autentikasi pengguna (user authentication) secara lengkap menggunakan paket resmi Laravel yaitu <code>laravel/ui</code> dengan framework Bootstrap, kemudian melakukan kustomisasi tampilan menggunakan template SB Admin 2, serta mengimplementasikan fitur manajemen data pengguna secara penuh mulai dari menampilkan daftar, membuat, memperbarui, hingga menghapus data (CRUD). Studi kasus yang digunakan adalah Sistem Informasi Sekolah (Sisfo).
                     </p>
 
                     <div class="mb-5 text-justify">
                         <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
                         <ul>
-                            <li>Mengetahui cara mengatur tabel database menggunakan Migration dan mengisi data awal
-                                menggunakan Seeding.</li>
-                            <li>Memahami cara membuat rute aplikasi (Routing) dan Model untuk berinteraksi dengan
-                                database.</li>
-                            <li>Mampu membuat Controller sebagai penghubung antara data dan tampilan.</li>
-                            <li>Mampu menampilkan data ke halaman web menggunakan sistem Blade Template milik Laravel.
-                            </li>
+                            <li>Memahami cara menginstal dan mengkonfigurasi paket <code>laravel/ui</code> untuk membuat sistem autentikasi berbasis Bootstrap secara otomatis.</li>
+                            <li>Mampu melakukan kustomisasi tabel <code>users</code> melalui migration untuk menambahkan field baru sesuai kebutuhan aplikasi.</li>
+                            <li>Memahami cara mengisi data awal ke database menggunakan fitur Seeding pada Laravel.</li>
+                            <li>Mampu membangun tampilan aplikasi yang konsisten menggunakan konsep Templating (Layouts) dengan Blade, memanfaatkan template SB Admin 2.</li>
+                            <li>Mampu mengimplementasikan fitur CRUD pengguna menggunakan Resource Controller.</li>
                         </ul>
                     </div>
 
                     <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah Kerja dan Implementasi</h4>
-                    <p class="mb-4">Berikut adalah langkah-langkah praktikum yang telah dilakukan beserta penjelasan
-                        dari gambar kode dan eksekusi programnya:</p>
 
                     <div class="mb-5">
-                        <h5 class="fw-bold">A. Konfigurasi Database</h5>
+                        <h5 class="fw-bold">A. Membuat Project dan Konfigurasi Database</h5>
                         <p class="text-justify">
-                            Langkah pertama dalam membuat proyek Laravel adalah mengatur koneksi ke database. Pengaturan
-                            ini dilakukan dengan mengubah beberapa baris pada file konfigurasi bernama `.env`. Pada file
-                            tersebut, jenis koneksi dipastikan menggunakan `mysql`, dan nama database diubah menjadi
-                            `praktikum_laravel`. Konfigurasi ini sangat penting agar aplikasi Laravel bisa terhubung dan
-                            menyimpan data ke dalam database lokal kita.
+                            Langkah pertama adalah membuat project Laravel baru. Terdapat dua cara yang bisa digunakan, yaitu menggunakan Laravel Global Installer atau menggunakan Composer. Pada praktikum ini digunakan Composer. Setelah project berhasil dibuat, langkah berikutnya adalah membuka file <code>.env</code> dan mengisi konfigurasi database agar Laravel dapat terhubung ke database MySQL lokal. Database yang digunakan pada studi kasus ini diberi nama <code>laravel_sisfo</code>.
                         </p>
-                        <div class="text-center mt-4 mb-3">
-                            <img src="/images/gb1.png" class="img-fluid mb-2 w-75"
-                                alt="Screenshot Konfigurasi Database">
-                            <span class="text-muted small d-block">Gambar 2.1: Konfigurasi file .env untuk
-                                database</span>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">.env</span>
+                            </div>
+                            <pre><code class="language-ini">DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel_sisfo
+DB_USERNAME=root
+DB_PASSWORD=</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4 mb-3 image-wrapper">
+                            <div class="img-placeholder" id="placeholder-a1">
+                                <i class="bi bi-image"></i>
+                                <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                <p class="small mb-0">Tampilan konfigurasi file .env pada editor</p>
+                                <input type="file" accept="image/*" onchange="previewImage(this, 'preview-a1', 'placeholder-a1')">
+                            </div>
+                            <img id="preview-a1" class="img-preview img-fluid rounded" alt="Preview">
+                            <span class="text-muted small d-block mt-2">Gambar 2.1: Konfigurasi file .env untuk koneksi database</span>
                         </div>
                     </div>
 
                     <div class="mb-5">
-                        <h5 class="fw-bold">B. Pembuatan Migration</h5>
+                        <h5 class="fw-bold">B. Instalasi Package Laravel/UI dan Scaffolding Autentikasi</h5>
                         <p class="text-justify">
-                            Migration digunakan untuk membuat struktur tabel database langsung melalui kode PHP,
-                            sehingga kita tidak perlu membuatnya secara manual. Pada praktikum ini, kita membuat file
-                            migration untuk tabel `products`. Di dalam kodenya, ditambahkan beberapa kolom yang
-                            dibutuhkan, yaitu kolom `name` dengan tipe string untuk nama produk, `price` dengan tipe
-                            integer untuk harga, dan `description` dengan tipe teks untuk deskripsi produk. Perintah
-                            `timestamps()` juga otomatis ditambahkan untuk mencatat kapan data dibuat dan diperbarui.
+                            Untuk membuat fitur autentikasi secara otomatis, Laravel menyediakan paket bernama <code>laravel/ui</code>. Paket ini perlu diinstal terlebih dahulu menggunakan Composer. Setelah paket berhasil diinstal, perintah <code>php artisan ui bootstrap --auth</code> dijalankan untuk membuat scaffolding autentikasi lengkap berbasis Bootstrap. Perintah ini secara otomatis akan menghasilkan halaman login, register, forgot password, beserta controller dan route yang diperlukan. Langkah terakhir adalah menjalankan <code>npm install && npm run dev</code> untuk mengompilasi file aset (CSS dan JavaScript) yang dibutuhkan.
                         </p>
-                        <div class="text-center mt-4 mb-3">
-                            <img src="/images/gb3.png" class="img-fluid mb-2 w-75" alt="Screenshot Migration">
-                            <span class="text-muted small d-block">Gambar 2.2: Kode pembuatan kolom pada file
-                                Migration</span>
-                        </div>
-                    </div>
 
-                    <div class="mb-5">
-                        <h5 class="fw-bold">C. Membuat Data Awal (Seeding)</h5>
-                        <p class="text-justify">
-                            Setelah tabel selesai dibuat, kita membutuhkan data contoh (dummy) untuk menguji aplikasi.
-                            Hal ini dilakukan menggunakan fitur Seeding. Pertama, kita membuat file seeder dengan
-                            mengetikkan perintah `php artisan make:seeder` di terminal. Setelah file seeder berhasil
-                            dibuat, kita menuliskan kode menggunakan `DB::table()->insert()` untuk memasukkan beberapa
-                            data produk secara langsung beserta atributnya seperti nama barang dan harga.
-                        </p>
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">Terminal</span>
+                            </div>
+                            <pre><code class="language-bash"># Langkah 1: Install package laravel/ui
+composer require laravel/ui
+
+# Langkah 2: Generate scaffolding autentikasi dengan Bootstrap
+php artisan ui bootstrap --auth
+
+# Langkah 3: Install dan compile asset (CSS & JS)
+npm install && npm run dev</code></pre>
+                        </div>
+
                         <div class="row justify-content-center mt-3 mb-4">
-                            <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb5.png" class="img-fluid mb-2" alt="Screenshot Perintah Seeder">
-                                <span class="text-muted small d-block">Gambar 2.3: Perintah membuat file Seeder di
-                                    terminal</span>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-b1">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Hasil instalasi composer require laravel/ui</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-b1', 'placeholder-b1')">
+                                </div>
+                                <img id="preview-b1" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.2: Proses instalasi laravel/ui berhasil</span>
                             </div>
-                            <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb6.png" class="img-fluid mb-2" alt="Screenshot Kode Seeder">
-                                <span class="text-muted small d-block">Gambar 2.4: Kode untuk menambahkan data produk
-                                    pada Seeder</span>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-b2">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Output perintah php artisan ui bootstrap --auth</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-b2', 'placeholder-b2')">
+                                </div>
+                                <img id="preview-b2" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.3: Scaffolding autentikasi berhasil digenerate</span>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Menjalankan Migration</h5>
                         <p class="text-justify">
-                            Untuk menjalankan file seeder dan memasukkan data tersebut ke dalam database, kita
-                            menggunakan perintah `php artisan db:seed`. Selain itu, Laravel juga menyediakan perintah
-                            yang sangat praktis yaitu `php artisan migrate:fresh --seed`. Perintah ini berfungsi ganda,
-                            yaitu menghapus semua tabel lama, membuat tabel ulang dari awal berdasarkan migration, lalu
-                            langsung mengisinya dengan data dari seeder.
+                            Setelah scaffolding autentikasi berhasil, langkah berikutnya adalah menjalankan perintah <code>php artisan migrate</code> agar Laravel membuat tabel-tabel yang dibutuhkan di database secara otomatis. Tabel yang akan dibuat antara lain adalah tabel <code>users</code>, <code>password_resets</code>, <code>failed_jobs</code>, dan <code>personal_access_tokens</code>. Jika database belum tersedia, Laravel akan meminta konfirmasi untuk membuatkannya terlebih dahulu.
                         </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">php artisan migrate</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4 mb-3 image-wrapper">
+                            <div class="img-placeholder" id="placeholder-c1">
+                                <i class="bi bi-image"></i>
+                                <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                <p class="small mb-0">Hasil perintah php artisan migrate</p>
+                                <input type="file" accept="image/*" onchange="previewImage(this, 'preview-c1', 'placeholder-c1')">
+                            </div>
+                            <img id="preview-c1" class="img-preview img-fluid rounded" alt="Preview">
+                            <span class="text-muted small d-block mt-2">Gambar 2.4: Proses migration berhasil, tabel berhasil dibuat di database</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Kustomisasi Tabel Users (Custom Migration)</h5>
+                        <p class="text-justify">
+                            Tabel <code>users</code> yang dihasilkan secara default oleh Laravel hanya memiliki kolom dasar seperti <code>name</code>, <code>email</code>, dan <code>password</code>. Pada studi kasus Sisfo, dibutuhkan tiga kolom tambahan yaitu <code>username</code> (unik), <code>level</code> (untuk peran pengguna), dan <code>status</code> (dengan pilihan ACTIVE atau INACTIVE). Untuk menambahkan kolom-kolom ini, dibuat sebuah migration baru menggunakan perintah artisan, kemudian file migration yang terbentuk diisi dengan kode penambahan kolom pada tabel <code>users</code>.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">php artisan make:migration costum_table_users</code></pre>
+                        </div>
+
+                        <p class="text-justify mt-3">
+                            Setelah file migration terbuat di folder <code>database/migrations/</code>, buka file tersebut dan isi method <code>up()</code> dengan kode berikut untuk menambahkan ketiga kolom baru ke tabel <code>users</code>. Method <code>down()</code> diisi dengan kode untuk menghapus kolom tersebut apabila migration di-rollback.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">database/migrations/..._costum_table_users.php</span>
+                            </div>
+                            <pre><code class="language-php">&lt;?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('username')->unique();
+            $table->string('level');
+            $table->enum('status', ['ACTIVE', 'INACTIVE']);
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('username');
+            $table->dropColumn('level');
+            $table->dropColumn('status');
+        });
+    }
+};</code></pre>
+                        </div>
+
+                        <div class="code-window mt-2">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">php artisan migrate</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4 mb-3 image-wrapper">
+                            <div class="img-placeholder" id="placeholder-d1">
+                                <i class="bi bi-image"></i>
+                                <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                <p class="small mb-0">Struktur tabel users setelah custom migration</p>
+                                <input type="file" accept="image/*" onchange="previewImage(this, 'preview-d1', 'placeholder-d1')">
+                            </div>
+                            <img id="preview-d1" class="img-preview img-fluid rounded" alt="Preview">
+                            <span class="text-muted small d-block mt-2">Gambar 2.5: Struktur tabel users setelah ditambahkan kolom username, level, dan status</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">E. Seeding: Membuat Akun Admin Awal</h5>
+                        <p class="text-justify">
+                            Setelah struktur tabel sesuai kebutuhan, langkah berikutnya adalah membuat data akun admin secara otomatis menggunakan fitur Seeding. Seeder dibuat dengan perintah artisan, kemudian file <code>AdminSeeder.php</code> yang terbentuk diisi dengan kode untuk membuat satu akun admin. Password disimpan dalam bentuk hash menggunakan <code>Hash::make()</code> agar aman. Level disimpan dalam format JSON karena satu user dapat memiliki lebih dari satu level. Setelah seeder siap, dijalankan dengan perintah <code>php artisan db:seed</code>.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">php artisan make:seeder AdminSeeder</code></pre>
+                        </div>
+
+                        <div class="code-window mt-2">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">database/seeders/AdminSeeder.php</span>
+                            </div>
+                            <pre><code class="language-php">&lt;?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class AdminSeeder extends Seeder
+{
+    public function run()
+    {
+        $admin = new \App\Models\User;
+        $admin->username = 'admin';
+        $admin->name     = 'Admin Aplikasi';
+        $admin->email    = 'admin@sisfo.com';
+        $admin->level    = json_encode(['ADMIN']);
+        $admin->status   = 'ACTIVE';
+        $admin->password = \Hash::make('12345678');
+        $admin->save();
+
+        $this->command->info('User Admin berhasil ditambahkan');
+    }
+}</code></pre>
+                        </div>
+
+                        <div class="code-window mt-2">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">php artisan db:seed --class=AdminSeeder</code></pre>
+                        </div>
+
                         <div class="row justify-content-center mt-3 mb-4">
-                            <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb7.png" class="img-fluid mb-2" alt="Screenshot Jalankan Seeder">
-                                <span class="text-muted small d-block">Gambar 2.5: Eksekusi perintah db:seed berjalan
-                                    sukses</span>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-e1">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Hasil perintah db:seed --class=AdminSeeder</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-e1', 'placeholder-e1')">
+                                </div>
+                                <img id="preview-e1" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.6: Seeding berhasil, user Admin berhasil ditambahkan</span>
                             </div>
-                            <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb8.png" class="img-fluid mb-2" alt="Screenshot Refresh Seeder">
-                                <span class="text-muted small d-block">Gambar 2.6: Proses reset database sekaligus
-                                    mengisi data seeder</span>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-e2">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Tampilan dashboard setelah login menggunakan akun admin</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-e2', 'placeholder-e2')">
+                                </div>
+                                <img id="preview-e2" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.7: Berhasil login menggunakan akun admin yang baru dibuat</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="mb-5">
-                        <h5 class="fw-bold">D. Pengaturan Alamat Web (Routing)</h5>
+                        <h5 class="fw-bold">F. Templating: Membuat Layout Global dengan SB Admin 2</h5>
                         <p class="text-justify">
-                            Routing berfungsi untuk mengatur setiap alamat link (URL) yang diketik oleh pengguna agar
-                            diarahkan ke halaman yang benar. Semua konfigurasi rute ini diletakkan pada file
-                            `routes/web.php`. Pada kode di bawah, kita membuat beberapa tipe rute. Mulai dari rute biasa
-                            yang mengembalikan teks langsung, rute dengan parameter ID untuk menampilkan data spesifik,
-                            hingga rute jenis *resource* yang secara otomatis akan membuat semua jalur URL yang
-                            diperlukan untuk fitur pengolahan data (CRUD).
+                            Pada tahap ini dilakukan konfigurasi tampilan aplikasi menggunakan template SB Admin 2 yang diunduh dari situs resminya. Seluruh file aset template (CSS, JS, font, dan gambar) disalin ke folder <code>public/sbadmin</code> pada project Laravel. Terdapat tiga layout utama yang dibuat, yaitu <code>app.blade.php</code> khusus untuk halaman login, dan <code>main.blade.php</code> sebagai layout utama yang menyertakan komponen <code>sidebar.blade.php</code> dan <code>topbar.blade.php</code>. Konsep <code>@yield</code> dan <code>@section</code> digunakan agar setiap halaman cukup mengisi bagian judul dan konten saja tanpa mengulang keseluruhan struktur HTML.
                         </p>
-                        <div class="text-center mt-4 mb-3">
-                            <img src="/images/gb9.png" class="img-fluid mb-2 w-75" alt="Screenshot Routing">
-                            <span class="text-muted small d-block">Gambar 2.7: Konfigurasi bermacam tipe rute di
-                                web.php</span>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">resources/views/layouts/main.blade.php (ringkasan struktur)</span>
+                            </div>
+                            <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;title&gt;Sisfo - @yield('judul')&lt;/title&gt;
+    &lt;link href="{{ asset('sbadmin/css/sb-admin-2.min.css') }}" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body id="page-top"&gt;
+    &lt;div id="wrapper"&gt;
+        @include('layouts.sidebar')
+        &lt;div id="content-wrapper"&gt;
+            @include('layouts.topbar')
+            &lt;div class="container-fluid"&gt;
+                &lt;h1 class="h3 mb-4"&gt;@yield('judul')&lt;/h1&gt;
+                @yield('konten')
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src="{{ asset('sbadmin/js/sb-admin-2.min.js') }}"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
                         </div>
 
-                        <p class="text-justify">
-                            Selain rute biasa, kita juga menggunakan fitur *Route Group* dengan tambahan penamaan
-                            *prefix*. Fitur ini digunakan untuk mengelompokkan URL. Pada contoh ini, kita mengelompokkan
-                            rute untuk bagian admin. Dengan begitu, setiap rute yang berada di dalam grup ini otomatis
-                            akan memiliki awalan '/admin' pada alamat webnya (misalnya `/admin/dashboard`). Hal ini
-                            membuat penulisan kode rute menjadi lebih rapi dan terorganisir.
+                        <p class="text-justify mt-3">
+                            Untuk menggunakan layout tersebut pada sebuah halaman, cukup tambahkan direktif <code>@extends</code> dan <code>@section</code> di bagian atas file Blade. Sebagai contoh, halaman dashboard hanya perlu menuliskan kode berikut tanpa harus mengulang seluruh struktur HTML:
                         </p>
-                        <div class="text-center mt-4 mb-3">
-                            <img src="/images/gb11.png" class="img-fluid mb-2 w-75" alt="Screenshot Route Group">
-                            <span class="text-muted small d-block">Gambar 2.8: Pengelompokan rute menggunakan
-                                prefix</span>
-                        </div>
-                    </div>
 
-                    <div class="mb-5">
-                        <h5 class="fw-bold">E. Konfigurasi Model</h5>
-                        <p class="text-justify">
-                            Model adalah bagian yang bertugas secara langsung untuk mengambil dan memproses data dari
-                            tabel database. Pada file `Product.php`, kita perlu menambahkan variabel `protected
-                            $fillable`. Fungsi dari kode ini adalah sebagai sistem keamanan untuk menentukan kolom tabel
-                            apa saja yang diizinkan untuk menerima inputan atau diisi secara massal oleh pengguna,
-                            seperti nama produk, harga, dan deskripsinya.
-                        </p>
-                        <div class="text-center mt-4 mb-3">
-                            <img src="/images/gb10.png" class="img-fluid mb-2 w-75" alt="Screenshot Model">
-                            <span class="text-muted small d-block">Gambar 2.9: Pengaturan izin kolom pada file
-                                Model</span>
-                        </div>
-                    </div>
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">resources/views/home.blade.php</span>
+                            </div>
+                            <pre><code class="language-php">@extends('layouts.main')
 
-                    <div class="mb-5">
-                        <h5 class="fw-bold">F. Pembuatan Controller dan Tampilan (View)</h5>
-                        <p class="text-justify">
-                            Controller berperan sebagai otak atau pengatur alur dari sebuah halaman. Controller dibuat
-                            dengan menggunakan perintah `php artisan make:controller` di terminal. Setelah dibuat,
-                            controller inilah yang akan menerima permintaan dari rute, memanggil data dari Model, dan
-                            mengirim data tersebut ke halaman depan. Halaman depan ini disebut View, yang dibuat
-                            menggunakan file dengan akhiran `.blade.php`. Fitur Blade memudahkan kita untuk menampilkan
-                            data dari controller secara dinamis ke dalam kode HTML dasar.
-                        </p>
+@section('judul') Dashboard @endsection
+
+@section('konten')
+    &lt;p&gt;Selamat datang di halaman Dashboard.&lt;/p&gt;
+@endsection</code></pre>
+                        </div>
+
                         <div class="row justify-content-center mt-3 mb-4">
-                            <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb12.png" class="img-fluid mb-2" alt="Screenshot Controller Command">
-                                <span class="text-muted small d-block">Gambar 2.10: Perintah pembuatan file
-                                    Controller</span>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-f1">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Tampilan halaman login dengan template SB Admin 2</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-f1', 'placeholder-f1')">
+                                </div>
+                                <img id="preview-f1" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.8: Halaman login setelah menggunakan template SB Admin 2</span>
                             </div>
-                            <div class="col-md-6 text-center mb-3">
-                                <img src="/images/gb15.png" class="img-fluid mb-2" alt="Screenshot View">
-                                <span class="text-muted small d-block">Gambar 2.11: Hasil tampilan halaman web
-                                    menggunakan View</span>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-f2">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Tampilan dashboard dengan sidebar dan topbar</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-f2', 'placeholder-f2')">
+                                </div>
+                                <img id="preview-f2" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.9: Tampilan dashboard menggunakan layout main.blade.php</span>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">G. Manajemen Users: Resource Controller dan Routing</h5>
+                        <p class="text-justify">
+                            Untuk fitur manajemen pengguna, digunakan Resource Controller yang secara otomatis menyediakan tujuh method standar CRUD (index, create, store, show, edit, update, destroy). Controller dibuat menggunakan perintah artisan dengan flag <code>--resource</code>, kemudian route resource didaftarkan pada file <code>routes/web.php</code>. Dengan satu baris <code>Route::resource()</code>, Laravel otomatis mendaftarkan semua jalur URL yang diperlukan untuk operasi CRUD.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">Terminal</span>
+                            </div>
+                            <pre><code class="language-bash">php artisan make:controller UserController --resource</code></pre>
+                        </div>
+
+                        <div class="code-window mt-2">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">routes/web.php</span>
+                            </div>
+                            <pre><code class="language-php">use App\Http\Controllers\UserController;
+
+Route::resource('users', UserController::class);</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4 mb-3 image-wrapper">
+                            <div class="img-placeholder" id="placeholder-g1">
+                                <i class="bi bi-image"></i>
+                                <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                <p class="small mb-0">Hasil php artisan route:list untuk route users</p>
+                                <input type="file" accept="image/*" onchange="previewImage(this, 'preview-g1', 'placeholder-g1')">
+                            </div>
+                            <img id="preview-g1" class="img-preview img-fluid rounded" alt="Preview">
+                            <span class="text-muted small d-block mt-2">Gambar 2.10: Pemetaan route resource users menggunakan php artisan route:list</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">H. Create User (Tambah Data)</h5>
+                        <p class="text-justify">
+                            Fitur tambah user diimplementasikan pada method <code>create()</code> dan <code>store()</code> di UserController. Method <code>create()</code> bertugas menampilkan form isian, sedangkan <code>store()</code> menangani proses penyimpanan data yang dikirim dari form tersebut. Form menggunakan elemen select dengan library Select2 agar pemilihan level (ADMIN, GURU, STAFF) dapat dilakukan secara multi-pilihan. Password disimpan dalam kondisi ter-hash, dan level disimpan dalam format JSON untuk mendukung satu user dengan banyak level.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">app/Http/Controllers/UserController.php — method create() & store()</span>
+                            </div>
+                            <pre><code class="language-php">public function create()
+{
+    return view('user.create');
+}
+
+public function store(Request $request)
+{
+    $user           = new \App\Models\User;
+    $user->name     = $request->get('nama');
+    $user->username = $request->get('username');
+    $user->email    = $request->get('email');
+    $user->password = \Hash::make($request->get('password'));
+    $user->level    = json_encode($request->get('level'));
+    $user->save();
+
+    return redirect()->route('users.index')
+                     ->with('status', 'User baru berhasil ditambahkan');
+}</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4 mb-3 image-wrapper">
+                            <div class="img-placeholder" id="placeholder-h1">
+                                <i class="bi bi-image"></i>
+                                <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                <p class="small mb-0">Tampilan form Create User di browser</p>
+                                <input type="file" accept="image/*" onchange="previewImage(this, 'preview-h1', 'placeholder-h1')">
+                            </div>
+                            <img id="preview-h1" class="img-preview img-fluid rounded" alt="Preview">
+                            <span class="text-muted small d-block mt-2">Gambar 2.11: Tampilan form Create User dengan field Nama, Email, Username, Password, dan Level</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">I. Read / List Users (Tampilkan Data)</h5>
+                        <p class="text-justify">
+                            Fitur menampilkan daftar seluruh pengguna diimplementasikan pada method <code>index()</code>. Data diambil dari model <code>User</code> menggunakan <code>::all()</code>, kemudian dikirimkan ke view <code>users/index.blade.php</code> sebagai variabel. Pada tampilan, data ditampilkan dalam bentuk tabel menggunakan library DataTables agar mendukung fitur pencarian, pengurutan, dan pagination secara otomatis. Sebuah tombol "Tambah User" juga ditampilkan untuk mengarahkan ke halaman form create.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">app/Http/Controllers/UserController.php — method index()</span>
+                            </div>
+                            <pre><code class="language-php">public function index()
+{
+    $users = \App\Models\User::all();
+    return view('users.index', ['users' => $users]);
+}</code></pre>
+                        </div>
+
+                        <div class="code-window mt-2">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">resources/views/users/index.blade.php (bagian tabel)</span>
+                            </div>
+                            <pre><code class="language-html">@extends('layouts.main')
+@section('judul') Users @endsection
+@section('konten')
+
+@if(session('status'))
+    &lt;div class="alert alert-success"&gt;{{ session('status') }}&lt;/div&gt;
+@endif
+
+&lt;p&gt;
+    &lt;a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"&gt;Tambah User&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;table class="table table-bordered" id="dataTable"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Username&lt;/th&gt;
+            &lt;th&gt;Email&lt;/th&gt;
+            &lt;th&gt;Action&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        @foreach($users as $user)
+        &lt;tr&gt;
+            &lt;td&gt;{{ $user->name }}&lt;/td&gt;
+            &lt;td&gt;{{ $user->username }}&lt;/td&gt;
+            &lt;td&gt;{{ $user->email }}&lt;/td&gt;
+            &lt;td&gt;[tombol action]&lt;/td&gt;
+        &lt;/tr&gt;
+        @endforeach
+    &lt;/tbody&gt;
+&lt;/table&gt;
+@endsection</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4 mb-3 image-wrapper">
+                            <div class="img-placeholder" id="placeholder-i1">
+                                <i class="bi bi-image"></i>
+                                <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                <p class="small mb-0">Tampilan halaman list Users di browser</p>
+                                <input type="file" accept="image/*" onchange="previewImage(this, 'preview-i1', 'placeholder-i1')">
+                            </div>
+                            <img id="preview-i1" class="img-preview img-fluid rounded" alt="Preview">
+                            <span class="text-muted small d-block mt-2">Gambar 2.12: Tampilan daftar users menggunakan DataTables</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">J. Update User (Edit Data)</h5>
+                        <p class="text-justify">
+                            Fitur edit data pengguna diimplementasikan melalui method <code>edit()</code> dan <code>update()</code>. Tombol Edit pada setiap baris tabel list user diarahkan ke URL <code>users/{id}/edit</code>. Method <code>edit()</code> mengambil data user berdasarkan ID menggunakan <code>findOrFail()</code> lalu mengirimkannya ke view form edit. Form edit menampilkan data yang sudah ada sehingga pengguna cukup mengubah bagian yang diperlukan. Karena HTML tidak mendukung method PUT secara langsung, digunakan input hidden dengan <code>name="_method"</code> bernilai <code>PUT</code>. Method <code>update()</code> kemudian menyimpan perubahan ke database.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">app/Http/Controllers/UserController.php — method edit() & update()</span>
+                            </div>
+                            <pre><code class="language-php">public function edit($id)
+{
+    $user = \App\Models\User::findOrFail($id);
+    return view('user.edit', ['user' => $user]);
+}
+
+public function update(Request $request, $id)
+{
+    $user        = \App\Models\User::findOrFail($id);
+    $user->name  = $request->get('nama');
+    $user->level = json_encode($request->get('level'));
+    $user->save();
+
+    return redirect()->route('users.index', [$id])
+                     ->with('status', 'User berhasil diubah');
+}</code></pre>
+                        </div>
+
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-j1">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Tampilan form Edit User</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-j1', 'placeholder-j1')">
+                                </div>
+                                <img id="preview-j1" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.13: Tampilan form Edit User dengan data yang sudah terisi</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-j2">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Halaman users setelah data berhasil diubah</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-j2', 'placeholder-j2')">
+                                </div>
+                                <img id="preview-j2" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.14: Alert sukses muncul setelah data user berhasil diubah</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">K. Delete User (Hapus Data)</h5>
+                        <p class="text-justify">
+                            Fitur hapus data diimplementasikan melalui method <code>destroy()</code>. Tombol Hapus pada tabel list user menggunakan sebuah form HTML dengan method POST dan input hidden bernilai <code>DELETE</code> agar Laravel mengenalinya sebagai request DELETE. Sebelum data dihapus, ditampilkan dialog konfirmasi menggunakan atribut <code>onsubmit</code> pada form. Jika pengguna mengonfirmasi, method <code>destroy()</code> akan mengambil data berdasarkan ID, menghapusnya, lalu mengarahkan kembali ke halaman daftar users disertai pesan sukses.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">resources/views/users/index.blade.php — tombol Hapus</span>
+                            </div>
+                            <pre><code class="language-html">&lt;form onsubmit="return confirm('Hapus data user ?')"
+      class="d-inline"
+      action="{{ route('users.destroy', [$user->id]) }}"
+      method="POST"&gt;
+    @csrf
+    &lt;input type="hidden" name="_method" value="DELETE"&gt;
+    &lt;input type="submit" value="Hapus" class="btn btn-danger btn-sm"&gt;
+&lt;/form&gt;</code></pre>
+                        </div>
+
+                        <div class="code-window mt-2">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">app/Http/Controllers/UserController.php — method destroy()</span>
+                            </div>
+                            <pre><code class="language-php">public function destroy($id)
+{
+    $user = \App\Models\User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->route('users.index')
+                     ->with('status', 'User berhasil dihapus');
+}</code></pre>
+                        </div>
+
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-k1">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Dialog konfirmasi hapus data muncul</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-k1', 'placeholder-k1')">
+                                </div>
+                                <img id="preview-k1" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.15: Pop-up konfirmasi sebelum data user dihapus</span>
+                            </div>
+                            <div class="col-md-6 text-center mb-3 image-wrapper">
+                                <div class="img-placeholder" id="placeholder-k2">
+                                    <i class="bi bi-image"></i>
+                                    <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                    <p class="small mb-0">Halaman users setelah data berhasil dihapus</p>
+                                    <input type="file" accept="image/*" onchange="previewImage(this, 'preview-k2', 'placeholder-k2')">
+                                </div>
+                                <img id="preview-k2" class="img-preview img-fluid rounded" alt="Preview">
+                                <span class="text-muted small d-block mt-2">Gambar 2.16: Alert sukses muncul setelah data user berhasil dihapus</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">L. Menambahkan Menu Users pada Sidebar</h5>
+                        <p class="text-justify">
+                            Agar menu Users dapat diakses dari sidebar navigasi, ditambahkan sebuah item menu baru pada file <code>layouts/sidebar.blade.php</code>. Item menu ini berisi ikon dan teks "Users" yang mengarah ke route <code>users.index</code>. Dengan penambahan ini, pengguna dapat langsung berpindah ke halaman manajemen users melalui sidebar tanpa harus mengetik URL secara manual.
+                        </p>
+
+                        <div class="code-window">
+                            <div class="code-window-titlebar">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                                <span class="filename">resources/views/layouts/sidebar.blade.php</span>
+                            </div>
+                            <pre><code class="language-html">&lt;li class="nav-item"&gt;
+    &lt;a class="nav-link" href="{{ route('users.index') }}"&gt;
+        &lt;i class="fas fa-fw fa-users"&gt;&lt;/i&gt;
+        &lt;span&gt;Users&lt;/span&gt;
+    &lt;/a&gt;
+&lt;/li&gt;</code></pre>
+                        </div>
+
+                        <div class="text-center mt-4 mb-3 image-wrapper">
+                            <div class="img-placeholder" id="placeholder-l1">
+                                <i class="bi bi-image"></i>
+                                <p class="mb-1 fw-semibold">Klik untuk upload screenshot</p>
+                                <p class="small mb-0">Tampilan sidebar dengan menu Users sudah muncul</p>
+                                <input type="file" accept="image/*" onchange="previewImage(this, 'preview-l1', 'placeholder-l1')">
+                            </div>
+                            <img id="preview-l1" class="img-preview img-fluid rounded" alt="Preview">
+                            <span class="text-muted small d-block mt-2">Gambar 2.17: Menu Users berhasil muncul pada sidebar navigasi</span>
                         </div>
                     </div>
 
                     <h4 class="fw-bold text-primary border-bottom pb-2">3. Kesimpulan</h4>
                     <p class="mb-5 text-justify">
-                        Melalui praktikum ini, dapat disimpulkan bahwa penggunaan pola MVC (Model-View-Controller) pada
-                        Laravel sangat mempermudah proses pembuatan website. Fitur Migration dan Seeding membuat
-                        manajemen database menjadi lebih praktis tanpa harus membuka database manager secara manual.
-                        Pemisahan fungsi antara pengelolaan rute (Routing), pengolahan data (Model), logika program
-                        (Controller), dan tampilan layar (View) membuat penulisan program menjadi lebih bersih, mudah
-                        dipahami, dan memudahkan ketika ada penambahan fitur nantinya.
+                        Melalui praktikum ini dapat disimpulkan bahwa Laravel menyediakan ekosistem yang sangat lengkap dan efisien untuk membangun aplikasi web. Paket <code>laravel/ui</code> memungkinkan pembuatan sistem autentikasi yang lengkap hanya dengan beberapa perintah di terminal. Kustomisasi tabel database melalui migration memberikan kontrol penuh atas struktur data tanpa harus menyentuh antarmuka database secara manual. Konsep Templating dengan Blade dan layout yang dapat diwariskan melalui <code>@extends</code> dan <code>@yield</code> sangat mempercepat pengembangan tampilan yang konsisten di seluruh halaman aplikasi. Terakhir, Resource Controller membuat implementasi CRUD menjadi jauh lebih terstruktur, karena seluruh method yang diperlukan sudah tersedia secara otomatis dengan konvensi penamaan yang baku.
                     </p>
 
                     <div class="mt-4 mb-3">
@@ -240,9 +828,12 @@
 
                     <div>
                         <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
-                        <span class="badge bg-danger me-1">HTML</span>
-                        <span class="badge bg-primary me-1">Laravel</span>
-                        <span class="badge bg-info text-dark">MySQL</span>
+                        <span class="badge bg-danger me-1">PHP</span>
+                        <span class="badge bg-primary me-1">Laravel 9</span>
+                        <span class="badge bg-success me-1">Bootstrap 4</span>
+                        <span class="badge bg-warning text-dark me-1">SB Admin 2</span>
+                        <span class="badge bg-info text-dark me-1">MySQL</span>
+                        <span class="badge bg-secondary">Blade Template</span>
                     </div>
 
                 </div>
@@ -257,7 +848,27 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="js/script.js"></script>
+    <script>
+        hljs.highlightAll();
+
+        function previewImage(input, previewId, placeholderId) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const preview     = document.getElementById(previewId);
+                const placeholder = document.getElementById(placeholderId);
+
+                preview.src          = e.target.result;
+                preview.style.display = 'block';
+                placeholder.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
 </body>
 
 </html>
