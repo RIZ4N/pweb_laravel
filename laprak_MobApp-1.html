@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum - Rizan Oesvan Idrati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        img.placeholder-box {
+            border: 2px dashed #adb5bd !important;
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+            min-height: 150px;
+            max-height: 420px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mt-5">
+
+        <div class="mb-4">
+            <a href="portofolio.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali ke Portofolio
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                        <h1 class="fw-bold">Laporan Praktikum Aplikasi Mobile: Input Widgets dan Basic Form</h1>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
+                    <p class="mb-1 text-justify">
+                        Praktikum ketiga pada mata kuliah Aplikasi Mobile ini membahas mengenai pembuatan basic form
+                        pada Flutter yang berfungsi untuk menerima inputan dari pengguna melalui keyboard. Basic form
+                        merupakan kumpulan widget input seperti TextField, TextFormField, CheckBox, Switch, Dropdown,
+                        dan sejenisnya yang digunakan untuk mengelola serta memvalidasi data masukan sebelum data
+                        tersebut diproses lebih lanjut oleh aplikasi. Melalui praktikum ini, mahasiswa diperkenalkan
+                        pada dua widget utama, yaitu TextField yang bersifat sederhana tanpa validasi otomatis, dan
+                        TextFormField yang sudah terintegrasi dengan logika validasi serta manajemen status form
+                        menggunakan GlobalKey dan FormState.
+                    </p>
+
+                    <div class="mb text-justify">
+                        <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
+                        <ul>
+                            <li>Mahasiswa mampu membuat beberapa jenis input widgets pada aplikasi Flutter.</li>
+                            <li>Mahasiswa mampu membuat dan mengontrol inputan yang diberikan oleh pengguna.</li>
+                            <li>Mahasiswa memahami perbedaan penggunaan TextField dan TextFormField.</li>
+                            <li>Mahasiswa mampu menerapkan validasi data menggunakan GlobalKey dan FormState.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4 mb-3">
+                        <a href="https://github.com/RIZ4N/pweb" target="_blank" class="btn btn-dark btn-sm">
+                            <i class="bi bi-github"></i> View Repository
+                        </a>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah kerja</h4>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Membuat Tampilan Basic Form dengan TextField</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/1.png" class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: Tampilan Awal Basic Form TextField">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Tampilan Awal
+                                Basic Form TextField</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada tahap ini dibuat file dart baru bernama form-textfield di dalam folder lib. Struktur
+                            halaman disusun menggunakan Scaffold dengan AppBar berjudul "Basic Form". Bagian isi
+                            halaman dibungkus dengan Padding dan Column agar susunan widget rapi dan sejajar ke kiri,
+                            terdiri dari widget Text sebagai label, widget TextField sebagai kolom inputan nama
+                            lengkap, serta ElevatedButton yang akan berfungsi sebagai pemicu aksi.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/1.png" class="img-fluid border rounded placeholder-box"
+                                alt=" Hasil Tampilan Basic Form TextField">
+                            <span class="text-muted small d-block mt-1"> Hasil Tampilan Basic Form
+                                TextField</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Hasil di atas menunjukkan tampilan form yang telah dijalankan pada browser/emulator,
+                            berupa kolom inputan nama lengkap beserta tombol "Tampilkan mama" yang belum memiliki
+                            fungsi apa pun karena onPressed masih dibiarkan kosong.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Menambahkan TextEditingController</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/tambahtexteditingcontrol.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: Penambahan TextEditingController">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Penambahan
+                                TextEditingController</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada class _MyFormState ditambahkan sebuah variabel bertipe TextEditingController yang
+                            bertugas mengambil serta mengelola nilai inputan dari pengguna. Bersamaan dengan itu,
+                            method dispose() dioverride untuk membersihkan controller tersebut dari memori ketika
+                            widget sudah tidak digunakan lagi, sehingga aplikasi terhindar dari kebocoran memori
+                            (memory leak).
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Menghubungkan Controller pada Widget TextField</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/tambahproperti.png" class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: Properti TextField dengan Controller">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Properti
+                                TextField dengan Controller</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Widget TextField yang sebelumnya dibuat dilengkapi dengan tiga properti tambahan, yaitu
+                            controller yang dihubungkan dengan _textEditingController, keyboardType untuk menentukan
+                            jenis papan ketik yang muncul, dan onChanged yang berfungsi sebagai event listener untuk
+                            mencetak teks yang sedang diketik pengguna secara langsung ke console setiap kali terjadi
+                            perubahan karakter.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Menampilkan Inputan Menggunakan SnackBar</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/onpressed.png" class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: Implementasi SnackBar pada onPressed">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Implementasi
+                                SnackBar pada onPressed</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method onPressed pada ElevatedButton diisi dengan kode yang mengambil nilai teks dari
+                            _textEditingController, kemudian nilai tersebut ditampilkan kepada pengguna melalui
+                            widget SnackBar, yaitu notifikasi singkat yang muncul pada bagian bawah layar aplikasi.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/2.png" class="img-fluid border rounded placeholder-box"
+                                alt=" Hasil Akhir Basic Form TextField Setelah Dijalankan">
+                            <span class="text-muted small d-block mt-1"> Hasil Akhir Basic Form
+                                TextField Setelah Dijalankan</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Hasil pengujian menunjukkan bahwa setelah nama lengkap diketikkan dan tombol ditekan,
+                            SnackBar muncul di bagian bawah layar menampilkan teks nama yang telah diinputkan
+                            sebelumnya, membuktikan bahwa controller berhasil mengambil nilai dari TextField dengan
+                            benar.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">E. Membuat Basic Form dengan TextFormField</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/kodeawalbasic.png" class="img-fluid"
+                                alt=" Kode Program: Tampilan Awal Basic Form TextFormField">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Tampilan Awal
+                                Basic Form TextFormField</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Dibuat file dart baru bernama form-textformfield yang berisi tampilan form dengan dua
+                            buah widget TextFormField untuk kolom nama dan email, serta satu ElevatedButton
+                            bertuliskan "Submit" yang dibungkus SizedBox agar lebar tombol memenuhi layar. Berbeda
+                            dari TextField, TextFormField dirancang agar dapat bekerja sama dengan widget Form untuk
+                            keperluan validasi data.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/4.jpg" class="img-fluid border rounded placeholder-box"
+                                alt=" Hasil Tampilan Awal Basic Form TextFormField">
+                            <span class="text-muted small d-block mt-1"> Hasil Tampilan Awal Basic Form
+                                TextFormField</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Tampilan awal ini masih menunjukkan dua kolom input yang belum tersambung dengan
+                            controller maupun validator, sehingga tombol Submit belum dapat memicu proses apa pun.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">F. Menambahkan GlobalKey dan Controller</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/kodeglobalcontrolsubmit.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: GlobalKey, Controller, dan Method _submitForm">
+                            <span class="text-muted small d-block mt-1"> Kode Program: GlobalKey,
+                                Controller, dan Method _submitForm</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada class _MyFormTextState ditambahkan variabel _formKey bertipe
+                            GlobalKey&lt;FormState&gt; untuk mengakses status Form secara global, beserta dua buah
+                            TextEditingController untuk menampung inputan nama dan email. Dibuat pula method
+                            _submitForm() yang memanggil _formKey.currentState!.validate() untuk menjalankan seluruh
+                            fungsi validator pada setiap TextFormField; apabila seluruh validasi bernilai true, nilai
+                            nama dan email akan ditampilkan melalui SnackBar.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">G. Membungkus Tampilan dengan Widget Form dan Menambahkan Validator</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/widgetformdanvalidator.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: Widget Form dan Validator pada TextFormField">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Widget Form dan
+                                Validator pada TextFormField</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Tampilan Column dibungkus menggunakan widget Form dan diberi properti key: _formKey agar
+                            terhubung dengan GlobalKey yang telah dibuat. Setiap TextFormField dilengkapi controller
+                            masing-masing beserta fungsi validator: kolom nama akan menampilkan pesan error apabila
+                            dikosongkan, sedangkan kolom email memvalidasi dua kondisi sekaligus, yaitu memastikan
+                            email tidak kosong dan memastikan formatnya mengandung karakter "@".
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">H. Menghubungkan Method _submitForm ke ElevatedButton</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/penghubungsubmit.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: Penghubungan _submitForm pada ElevatedButton">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Penghubungan
+                                _submitForm pada ElevatedButton</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method _submitForm dikaitkan dengan properti onPressed pada ElevatedButton yang
+                            dibungkus SizedBox agar lebar tombol memenuhi layar. Dengan demikian, setiap kali tombol
+                            Submit ditekan, proses validasi pada seluruh TextFormField akan dijalankan terlebih
+                            dahulu sebelum data ditampilkan.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/tampilanakhirbasicformtextfiled.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Hasil Akhir Basic Form TextFormField Beserta Validasinya">
+                            <span class="text-muted small d-block mt-1"> Hasil Akhir Basic Form
+                                TextFormField Beserta Validasinya</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Hasil pengujian menunjukkan bahwa saat kolom nama atau email dikosongkan atau format
+                            email tidak valid, pesan error otomatis muncul di bawah field yang bersangkutan. Ketika
+                            seluruh data valid dan tombol Submit ditekan, SnackBar muncul menampilkan nama dan email
+                            yang berhasil divalidasi.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">3. Tugas/Latihan (Kelas B)</h4>
+                    <div class="mb-5">
+                        <h5 class="fw-bold">Implementasi Form Pendaftaran Pengguna</h5>
+                        <p class="text-justify mb-4">
+                            Sesuai instruksi latihan Kelas B, dibuat aplikasi form pendaftaran pengguna yang terdiri
+                            dari empat kolom inputan yaitu nama, email, password, dan confirm password, beserta satu
+                            tombol submit. Implementasi dipecah menjadi dua file dart, yaitu main.dart sebagai root
+                            aplikasi dan user_registration_form.dart yang berisi logika form.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/maindart.png" class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: main.dart">
+                            <span class="text-muted small d-block mt-1"> Kode Program: main.dart</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            File main.dart menggunakan MaterialApp sebagai root aplikasi dengan properti home
+                            diarahkan langsung ke widget UserRegistrationForm yang bertipe StatefulWidget.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/deklarasiglobaltugas.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Kode Program: Deklarasi GlobalKey dan Controller pada user_registration_form.dart">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Deklarasi
+                                GlobalKey dan Controller pada user_registration_form.dart</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada class _UserRegistrationFormState dideklarasikan sebuah _formKey bertipe
+                            GlobalKey&lt;FormState&gt; beserta empat TextEditingController untuk menampung nilai
+                            nama, email, password, dan confirm password. Seluruh controller tersebut dibersihkan pada
+                            method dispose() agar tidak membebani memori aplikasi.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/validatortexformfieldemaildannama.png" class="img-fluid"
+                                alt=" Kode Program: Validator pada Kolom Nama dan Email">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Validator pada
+                                Kolom Nama dan Email</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Kolom nama divalidasi agar tidak boleh dikosongkan, sedangkan kolom email divalidasi
+                            dengan dua ketentuan, yaitu tidak boleh kosong dan wajib mengandung karakter "@" agar
+                            dianggap sebagai format email yang benar.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/widgetformdanvalidator.png" class="img-fluid"
+                                alt=" Kode Program: Validator pada Kolom Password dan Confirm Password">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Validator pada
+                                Kolom Password dan Confirm Password</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Kolom password divalidasi agar tidak kosong dan memiliki panjang minimal enam karakter.
+                            Kolom confirm password divalidasi dengan membandingkan nilainya terhadap nilai pada
+                            controller password menggunakan operator perbandingan string, sehingga apabila kedua
+                            nilai tersebut berbeda, pesan error "Password tidak sama" akan ditampilkan.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/submitformtugas.png" class="img-fluid"
+                                alt=" Kode Program: Method _submitForm dan Pemasangannya pada Tombol Submit">
+                            <span class="text-muted small d-block mt-1"> Kode Program: Method
+                                _submitForm dan Pemasangannya pada Tombol Submit</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method _submitForm memanggil _formKey.currentState!.validate() untuk menjalankan seluruh
+                            validator secara serentak. Apabila hasilnya bernilai true, aplikasi akan menampilkan
+                            SnackBar bertuliskan "Pendaftaran Berhasil" sebagai tanda bahwa seluruh data yang
+                            diinputkan telah lolos validasi.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/tampilanawaltugas.jpg" class="img-fluid"
+                                alt=" Hasil Tampilan Awal Form Pendaftaran Pengguna">
+                            <span class="text-muted small d-block mt-1"> Hasil Tampilan Awal Form
+                                Pendaftaran Pengguna</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Tampilan awal menunjukkan keempat kolom inputan tersusun rapi secara vertikal beserta
+                            tombol Submit di bagian bawah yang lebarnya memenuhi layar.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/validasisalahtugas.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Hasil Pengujian Validasi Saat Kolom Kosong atau Format Salah">
+                            <span class="text-muted small d-block mt-1"> Hasil Pengujian Validasi Saat
+                                Kolom Kosong atau Format Salah</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Ketika tombol Submit ditekan pada kondisi terdapat kolom yang masih kosong, format email
+                            salah, atau password dan confirm password tidak sama, pesan error yang sesuai langsung
+                            muncul di bawah masing-masing field yang bermasalah.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/validasibenartugas.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt=" Hasil Notifikasi Pendaftaran Berhasil">
+                            <span class="text-muted small d-block mt-1"> Hasil Notifikasi Pendaftaran
+                                Berhasil</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setelah seluruh data diisi dengan benar dan tombol Submit ditekan, SnackBar "Pendaftaran
+                            Berhasil" muncul di bagian bawah layar, menandakan bahwa seluruh proses validasi telah
+                            berjalan sesuai dengan yang diharapkan.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">4. Kesimpulan</h4>
+                    <p class="mb-5 text-justify">
+                        Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa Flutter menyediakan dua
+                        jenis widget input utama, yaitu TextField yang cocok digunakan untuk kebutuhan inputan
+                        sederhana tanpa validasi, serta TextFormField yang lebih tepat digunakan pada form dengan
+                        kebutuhan validasi data. Penggunaan GlobalKey bersama FormState memungkinkan seluruh proses
+                        validasi pada beberapa TextFormField dijalankan secara serentak dan terpusat melalui satu
+                        method saja. Implementasi pada studi kasus form pendaftaran pengguna semakin memperkuat
+                        pemahaman mengenai bagaimana validasi bertingkat, seperti pengecekan format email dan
+                        kecocokan password, dapat diterapkan secara efektif untuk menghasilkan aplikasi mobile yang
+                        lebih aman dan andal.
+                    </p>
+
+                    <div>
+                        <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
+                        <span class="badge bg-info text-dark me-1">Flutter</span>
+                        <span class="badge bg-primary me-1">Dart</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-custom bg-dark text-white py-4 mt-5">
+        <div class="container text-center text-white-50 small">
+            © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
