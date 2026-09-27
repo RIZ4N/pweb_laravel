@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum - Rizan Oesvan Idrati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        img.placeholder-box {
+            border: 2px dashed #000000 !important;
+            background-color: #000000;
+            padding: 0.5rem;
+            min-height: 150px;
+            max-height: 420px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mt-5">
+
+        <div class="mb-4">
+            <a href="portofolio.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali ke Portofolio
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                        <h1 class="fw-bold">Laporan Praktikum Aplikasi Mobile: Input Widgets &amp; Forms;
+                            Menangkap Data, Dropdown, dan Validasi</h1>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
+                    <p class="mb-1 text-justify">
+                        Praktikum ketiga Aplikasi Mobile ini membahas pembuatan formulir input pada Flutter
+                        menggunakan TextFormField, DropdownButtonFormField, serta mekanisme validasi data melalui
+                        GlobalKey dan FormState. Studi kasus yang diterapkan adalah halaman Catat Transaksi Baru
+                        yang menangkap judul transaksi, nominal, dan kategori dari pengguna sebelum data tersebut
+                        diproses lebih lanjut oleh aplikasi.
+                    </p>
+
+                    <div class="mb text-justify">
+                        <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
+                        <ul>
+                            <li>Mahasiswa mampu menangkap teks masukan pengguna menggunakan
+                                TextEditingController.</li>
+                            <li>Mahasiswa mampu menerapkan widget dropdown statis menggunakan
+                                DropdownButtonFormField.</li>
+                            <li>Mahasiswa mampu menerapkan validasi input untuk mencegah data kosong atau format
+                                yang tidak sesuai.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4 mb-3">
+                        <a href="https://github.com/RIZ4N/PrakAppMob_B_2411531010" target="_blank" class="btn btn-dark btn-sm">
+                            <i class="bi bi-github"></i> View Repository
+                        </a>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah Kerja</h4>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Struktur Dasar Halaman (Scaffold, AppBar &amp; SingleChildScrollView)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/BagianA.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Struktur Scaffold, AppBar, dan Pembungkus Form">
+                            <span class="text-muted small d-block mt-1">Kode Program: Struktur Scaffold, AppBar, dan
+                                Pembungkus Form</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method build mengembalikan Scaffold dengan AppBar berjudul "Catat Transaksi Baru"
+                            berwarna deepPurple. Isi halaman dibungkus SingleChildScrollView agar tampilan tidak
+                            overflow saat keyboard muncul, lalu widget Form dengan key: _formKey membungkus Column
+                            crossAxisAlignment.stretch yang menampung seluruh kolom input, dropdown, dan tombol agar
+                            lebarnya memenuhi layar.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Persiapan State &amp; Controller</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/BagianB.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Struktur _AddTransactionScreenState">
+                            <span class="text-muted small d-block mt-1">Kode Program: Struktur
+                                _AddTransactionScreenState</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            AddTransactionScreen dibuat sebagai StatefulWidget karena isi formulir berupa teks dan
+                            pilihan dropdown akan terus berubah seiring interaksi pengguna. Pada class
+                            _AddTransactionScreenState dideklarasikan _formKey bertipe GlobalKey&lt;FormState&gt;
+                            sebagai kunci utama untuk memicu validasi seluruh kolom sekaligus, dua
+                            TextEditingController (_titleController dan _amountController) untuk menampung teks
+                            judul dan nominal, serta variabel _selectedCategory bertipe String dengan nilai awal
+                            'Makanan' untuk menyimpan kategori yang sedang dipilih pada dropdown.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Membersihkan Controller (dispose())</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/BagianC.png" class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Method dispose()">
+                            <span class="text-muted small d-block mt-1">Kode Program: Method dispose()</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method dispose() dioverride untuk memanggil dispose() pada _titleController,
+                            _amountController, dan _dateController sebelum memanggil super.dispose(), sehingga
+                            seluruh controller dibersihkan dari memori ketika halaman AddTransactionScreen sudah
+                            tidak digunakan lagi dan aplikasi terhindar dari memory leak.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Membuat Kolom Input (TextFormField)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/BagianD.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: TextFormField Judul dan Nominal Transaksi">
+                            <span class="text-muted small d-block mt-1">Kode Program: TextFormField Judul dan
+                                Nominal Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Seluruh kolom input dibungkus widget Form dan dihubungkan melalui key: _formKey. Kolom
+                            pertama menggunakan TextFormField dengan controller _titleController, decoration
+                            labelText "Judul Transaksi", dan validator yang mengembalikan pesan error apabila value
+                            kosong. Kolom kedua menggunakan controller _amountController dengan keyboardType:
+                            TextInputType.number agar papan ketik yang muncul berupa angka, serta validator
+                            bertingkat yang memeriksa apakah value kosong terlebih dahulu, kemudian memeriksa apakah
+                            value dapat dikonversi menjadi angka melalui int.tryParse sebelum dianggap valid.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">E. Dropdown &amp; Tombol Simpan</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/BagianE.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: DropdownButtonFormField dan Tombol Simpan">
+                            <span class="text-muted small d-block mt-1">Kode Program: DropdownButtonFormField dan
+                                Tombol Simpan</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Kategori transaksi ditangkap melalui DropdownButtonFormField&lt;String&gt; dengan value
+                            terikat pada _selectedCategory dan items yang dibangun dari daftar kategori menggunakan
+                            method map, masing-masing dibungkus DropdownMenuItem. Properti onChanged memanggil
+                            setState untuk memperbarui _selectedCategory setiap kali pengguna memilih opsi baru. Di
+                            bawahnya, ElevatedButton "Simpan Transaksi" pada onPressed memanggil
+                            _formKey.currentState!.validate() untuk menjalankan seluruh validator secara serentak;
+                            apabila hasilnya true, SnackBar ditampilkan sebagai tanda bahwa data telah lolos
+                            validasi.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">Hasil Akhir</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/HasilAkhirLangkahPraktikum.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Akhir: Mockup Formulir Catat Transaksi">
+                            <span class="text-muted small d-block mt-1">Hasil Akhir: Mockup Formulir Catat
+                                Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Halaman menampilkan AppBar berwarna ungu bertuliskan "Catat Transaksi Baru", diikuti
+                            kolom Judul Transaksi, kolom Nominal yang menampilkan pesan error berwarna merah apabila
+                            format yang dimasukkan bukan angka, dropdown Kategori dengan opsi bawaan "Makanan", dan
+                            tombol Simpan Transaksi di bagian bawah. SnackBar hijau muncul setelah tombol ditekan
+                            apabila seluruh kolom telah terisi dengan format yang benar.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">3. Tugas/Latihan: Menambahkan Input Tanggal
+                        Transaksi</h4>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Menyiapkan Controller dan Fungsi Pilih Tanggal</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/KodeTugasA.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Controller dan Fungsi _selectDate">
+                            <span class="text-muted small d-block mt-1">Kode Program: Controller dan Fungsi
+                                _selectDate</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Ditambahkan TextEditingController baru bernama _dateController untuk menampung teks
+                            tanggal yang telah dipilih, beserta method _selectDate yang memanggil showDatePicker dan
+                            menunggu tanggal yang dipilih pengguna melalui date picker bawaan Flutter. Setelah
+                            tanggal dipilih, nilai day, month, dan year pada objek DateTime hasil pilihan diformat
+                            secara manual ke pola DD/MM/YYYY menggunakan padLeft(2, '0') agar tanggal dan bulan satu
+                            digit tetap tampil dua digit, tanpa memerlukan package tambahan, kemudian hasilnya
+                            ditetapkan ke dalam _dateController.text.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Menambahkan Input Tanggal pada Form</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/KodeTugasB.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: TextFormField Tanggal Transaksi">
+                            <span class="text-muted small d-block mt-1">Kode Program: TextFormField Tanggal
+                                Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Sebuah TextFormField baru ditambahkan sebelum tombol Simpan Transaksi, dengan controller
+                            _dateController, properti readOnly bernilai true agar keyboard tidak muncul, serta
+                            suffixIcon berupa IconButton kalender yang memanggil _selectDate saat ditekan. Validator
+                            pada kolom ini mengembalikan pesan error apabila _dateController.text masih kosong,
+                            sesuai instruksi tugas yang mewajibkan pengisian tanggal.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">Hasil Tampilan Tugas</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/HasilTugasA.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan Tugas: Kolom Tanggal Terisi">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan Tugas: Kolom Tanggal
+                                Terisi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setelah ikon kalender ditekan dan tanggal dipilih melalui date picker, kolom Tanggal
+                            Transaksi menampilkan teks tanggal dengan format DD/MM/YYYY, sejajar dengan kolom-kolom
+                            input lain di atasnya sebelum tombol Simpan Transaksi.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum3/HasilTugasB.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan Tugas: Validasi Kolom Tanggal Kosong">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan Tugas: Validasi Kolom Tanggal
+                                Kosong</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Apabila tombol Simpan Transaksi ditekan sementara kolom Tanggal Transaksi belum diisi,
+                            pesan error berwarna merah muncul di bawah kolom tersebut bersamaan dengan pesan error
+                            pada kolom lain yang belum valid, menandakan bahwa validator tanggal turut dijalankan
+                            oleh _formKey.currentState!.validate().
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">4. Kesimpulan</h4>
+                    <p class="mb-5 text-justify">
+                        Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa TextEditingController
+                        berperan penting dalam menangkap serta mengelola nilai masukan pengguna pada TextFormField,
+                        sementara DropdownButtonFormField memudahkan penyediaan pilihan tetap tanpa perlu widget
+                        tambahan untuk validasinya. Penggunaan GlobalKey bersama FormState memungkinkan seluruh
+                        validator pada berbagai jenis input, termasuk kolom tanggal yang memanfaatkan
+                        showDatePicker, dijalankan secara serentak melalui satu method saja, sehingga proses
+                        pengecekan data sebelum disimpan menjadi lebih terpusat dan konsisten.
+                    </p>
+
+                    <div>
+                        <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
+                        <span class="badge bg-info text-dark me-1">Flutter</span>
+                        <span class="badge bg-primary me-1">Dart</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-custom bg-dark text-white py-4 mt-5">
+        <div class="container text-center text-white-50 small">
+            © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
