@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum - Rizan Oesvan Idrati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        img.placeholder-box {
+            border: 2px dashed #adb5bd !important;
+            min-height: 150px;
+            max-height: 600px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mt-5">
+
+        <div class="mb-4">
+            <a href="portofolio.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali ke Portofolio
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                        <h1 class="fw-bold">Laporan Praktikum Aplikasi Mobile: Navigasi &amp; Passing Data;
+                            Navigator, Konsep Stack, dan Constructor</h1>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
+                    <p class="mb-1 text-justify">
+                        Praktikum keempat Aplikasi Mobile ini membahas perpindahan antarhalaman pada Flutter
+                        menggunakan Navigator yang bekerja dengan konsep tumpukan (stack). Navigator.push digunakan
+                        untuk meletakkan halaman baru di tumpukan teratas, sedangkan Navigator.pop digunakan untuk
+                        menutup halaman teratas dan kembali ke halaman sebelumnya. Selain itu, praktikum ini juga
+                        menerapkan pengiriman data antarhalaman melalui constructor, sehingga halaman detail
+                        transaksi dapat menampilkan informasi yang sesuai dengan baris transaksi yang dipilih pada
+                        dashboard. Struktur proyek dibagi menjadi empat file terpisah, yaitu main.dart,
+                        dashboard_screen.dart, add_transaction_screen.dart, dan transaction_detail_screen.dart.
+                    </p>
+
+                    <div class="mb text-justify">
+                        <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
+                        <ul>
+                            <li>Mahasiswa mampu menerapkan Navigator.push untuk berpindah ke layar baru.</li>
+                            <li>Mahasiswa mampu menggunakan Navigator.pop untuk menutup layar setelah aksi
+                                selesai.</li>
+                            <li>Mahasiswa mampu mengirim data antarlayar melalui constructor.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4 mb-3">
+                        <a href="https://github.com/RIZ4N/PrakAppMob_B_2411531010" target="_blank" class="btn btn-dark btn-sm">
+                            <i class="bi bi-github"></i> View Repository
+                        </a>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah Kerja</h4>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Konfigurasi Aplikasi Utama (main.dart)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/main_dart.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: lib/main.dart">
+                            <span class="text-muted small d-block mt-1">Kode Program: lib/main.dart</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            File main.dart menjadi titik awal aplikasi melalui fungsi main() yang memanggil
+                            runApp(). Class MyApp mengembalikan MaterialApp dengan tema primarySwatch merah sesuai
+                            Modul 4, menonaktifkan banner debug, dan menetapkan DashboardScreen sebagai halaman
+                            home, sehingga DashboardScreen menjadi halaman pertama yang berada di dasar tumpukan
+                            Navigator.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Membuat Halaman Detail Transaksi (Variabel Final &amp; Constructor)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/detail_constructor.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Variabel dan Constructor TransactionDetailScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: Variabel dan Constructor
+                                TransactionDetailScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Dibuat file transaction_detail_screen.dart berisi TransactionDetailScreen yang
+                            diturunkan dari StatelessWidget. Empat variabel final bertipe String, yaitu title,
+                            amount, category, dan date, dideklarasikan sebagai penampung data yang dikirim dari
+                            halaman sebelumnya. Variabel tersebut harus final karena StatelessWidget tidak dapat
+                            mengubah datanya setelah dibangun. Constructor menggunakan kata kunci required pada
+                            setiap parameter, sehingga halaman ini tidak dapat dibuka tanpa data lengkap yang
+                            diserahkan oleh halaman pemanggilnya.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Tampilan Halaman Detail &amp; Widget Pembantu _buildDetailRow</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/detail_build.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Method build dan _buildDetailRow pada TransactionDetailScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: Method build dan
+                                _buildDetailRow pada TransactionDetailScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method build mengembalikan Scaffold dengan AppBar "Detail Transaksi" berwarna merah.
+                            Isi halaman berupa Column yang menampilkan ikon receipt_long berukuran besar, diikuti
+                            Text title dan Text amount yang langsung memakai data dari constructor, lalu Divider
+                            sebagai pemisah. Informasi kategori, tanggal, dan status ditampilkan melalui method
+                            pembantu _buildDetailRow yang mengembalikan Row spaceBetween berisi label berwarna
+                            abu-abu di kiri dan nilai bercetak tebal di kanan, sehingga setiap baris detail
+                            memiliki format yang seragam tanpa menuliskan kode yang sama berulang kali.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Struktur Dashboard &amp; Kartu Saldo</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/dashboard_struktur.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Scaffold DashboardScreen dan _buildBalanceCard">
+                            <span class="text-muted small d-block mt-1">Kode Program: Scaffold DashboardScreen dan
+                                _buildBalanceCard</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            DashboardScreen pada dashboard_screen.dart menggabungkan antarmuka Modul 1 dan Modul 2
+                            dalam satu Scaffold dengan AppBar "Dashboard Keuangan". Bagian body dibungkus
+                            SingleChildScrollView berisi Column yang menyusun teks sapaan, kartu saldo, judul
+                            Transaksi Terakhir, dan daftar transaksi. Kartu saldo dibangun melalui method
+                            _buildBalanceCard yang mengembalikan Card berwarna redAccent dengan sudut membulat,
+                            sedangkan daftar transaksi dibangun melalui _buildTransactionList yang menerima
+                            parameter context agar dapat digunakan oleh Navigator di dalamnya.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">E. Pindah ke Detail &amp; Mengirim Data (Push)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/listtile_push.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: onTap ListTile dengan Navigator.push">
+                            <span class="text-muted small d-block mt-1">Kode Program: onTap ListTile dengan
+                                Navigator.push</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setiap ListTile pada _buildTransactionList diberi properti onTap yang memanggil
+                            Navigator.push dengan MaterialPageRoute. Builder pada MaterialPageRoute membuat objek
+                            TransactionDetailScreen sekaligus mengisi constructor-nya dengan data milik baris yang
+                            diklik. Baris Makan Siang mengirim nominal "- Rp 50.000" dengan kategori Makanan,
+                            sedangkan baris Gaji Bulanan mengirim nominal "+ Rp 5.000.000" dengan kategori
+                            Pemasukan, sehingga halaman detail yang terbuka selalu sesuai dengan transaksi yang
+                            dipilih.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">F. Tombol Tambah Transaksi (FloatingActionButton)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/fab_push.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: FloatingActionButton menuju AddTransactionScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: FloatingActionButton menuju
+                                AddTransactionScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Scaffold dashboard dilengkapi FloatingActionButton berwarna merah dengan ikon add.
+                            Saat ditekan, tombol ini memanggil Navigator.push untuk membuka AddTransactionScreen.
+                            Berbeda dengan navigasi ke halaman detail, perpindahan ini tidak membawa data apa pun
+                            karena halaman formulir justru bertugas menerima masukan baru dari pengguna.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">G. Menutup Layar / Kembali Otomatis (Pop)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/form_pop.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: AddTransactionScreen dengan Navigator.pop">
+                            <span class="text-muted small d-block mt-1">Kode Program: AddTransactionScreen dengan
+                                Navigator.pop</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada add_transaction_screen.dart, formulir berisi kolom Judul dan Nominal yang
+                            masing-masing memiliki validator wajib diisi. Di dalam onPressed tombol Simpan, setelah
+                            _formKey.currentState!.validate() bernilai true, SnackBar "Transaksi Berhasil
+                            Disimpan!" ditampilkan, lalu Navigator.pop(context) dipanggil untuk menghapus halaman
+                            formulir dari tumpukan. Akibatnya, pengguna otomatis kembali ke dashboard tanpa harus
+                            menekan tombol kembali secara manual.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">Hasil Akhir</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/hasil_dashboard.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Akhir: Tampilan Awal Dashboard Keuangan">
+                            <span class="text-muted small d-block mt-1">Hasil Akhir: Tampilan Awal Dashboard
+                                Keuangan</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Saat aplikasi dijalankan, dashboard menampilkan AppBar merah bertuliskan "Dashboard
+                            Keuangan", teks sapaan, kartu saldo berwarna merah, serta daftar Transaksi Terakhir
+                            yang berisi Makan Siang dan Gaji Bulanan. FloatingActionButton dengan ikon tambah
+                            terlihat di pojok kanan bawah layar.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/hasil_detail_makan_siang.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Akhir: Detail Transaksi Makan Siang (Pengeluaran)">
+                            <span class="text-muted small d-block mt-1">Hasil Akhir: Detail Transaksi Makan Siang
+                                (Pengeluaran)</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Ketika baris Makan Siang diklik, halaman Detail Transaksi terbuka dan menampilkan judul
+                            Makan Siang, nominal pengeluaran, kategori Makanan, tanggal transaksi, serta status
+                            Berhasil. Tombol panah kiri muncul secara otomatis di AppBar karena halaman ini dibuka
+                            melalui Navigator.push, dan menekannya akan mengembalikan pengguna ke dashboard.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/hasil_detail_gaji_bulanan.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Akhir: Detail Transaksi Gaji Bulanan (Pemasukan)">
+                            <span class="text-muted small d-block mt-1">Hasil Akhir: Detail Transaksi Gaji Bulanan
+                                (Pemasukan)</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Ketika baris Gaji Bulanan diklik, halaman detail yang sama menampilkan data yang
+                            berbeda, yaitu judul Gaji Bulanan, nominal pemasukan, dan kategori Pemasukan. Hal ini
+                            menunjukkan bahwa satu halaman TransactionDetailScreen dapat digunakan ulang untuk
+                            berbagai transaksi karena isinya sepenuhnya bergantung pada data yang dikirim melalui
+                            constructor.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">3. Tugas/Latihan: Menambahkan Input Tanggal
+                        Transaksi</h4>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Menyiapkan Controller dan Fungsi Pilih Tanggal</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/tugas_controller_selectdate.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Controller dan Fungsi _selectDate">
+                            <span class="text-muted small d-block mt-1">Kode Program: Controller dan Fungsi
+                                _selectDate</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada _AddTransactionScreenState ditambahkan TextEditingController bernama
+                            _dateController untuk menampung teks tanggal, beserta method _selectDate yang memanggil
+                            showDatePicker bawaan Flutter. Setelah pengguna memilih tanggal, nilai day, month, dan
+                            year dari objek DateTime diformat secara manual menjadi pola DD/MM/YYYY dengan bantuan
+                            padLeft(2, '0') agar tanggal dan bulan satu digit tetap tampil dua digit, kemudian
+                            hasilnya dimasukkan ke _dateController.text di dalam setState.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Menambahkan Input Tanggal pada Form</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/tugas_textformfield_tanggal.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: TextFormField Tanggal Transaksi">
+                            <span class="text-muted small d-block mt-1">Kode Program: TextFormField Tanggal
+                                Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            TextFormField baru ditempatkan setelah kolom Nominal dan sebelum tombol Simpan, dengan
+                            controller _dateController dan properti readOnly bernilai true sehingga tanggal hanya
+                            dapat diisi melalui date picker. Date picker dapat dibuka dengan mengetuk kolom melalui
+                            onTap maupun menekan IconButton kalender pada suffixIcon. Validator pada kolom ini
+                            mengembalikan pesan "Tanggal wajib diisi" apabila kolom masih kosong, sehingga ikut
+                            diperiksa ketika tombol Simpan menjalankan validasi formulir.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">Hasil Tampilan Tugas</h5>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/tugas_hasil_terisi.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan Tugas: Kolom Tanggal Terisi">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan Tugas: Kolom Tanggal
+                                Terisi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setelah tanggal dipilih melalui date picker, kolom Tanggal Transaksi menampilkan
+                            tanggal dengan format DD/MM/YYYY di bawah kolom Nominal dan di atas tombol Simpan.
+                        </p>
+
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum4/tugas_hasil_validasi.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan Tugas: Validasi Kolom Tanggal Kosong">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan Tugas: Validasi Kolom Tanggal
+                                Kosong</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Apabila tombol Simpan ditekan saat kolom Tanggal Transaksi masih kosong, pesan error
+                            berwarna merah muncul di bawah kolom tersebut dan halaman formulir tidak ditutup,
+                            karena Navigator.pop hanya dijalankan setelah seluruh kolom lolos validasi.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">4. Kesimpulan</h4>
+                    <p class="mb-5 text-justify">
+                        Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa Navigator pada Flutter
+                        mengelola halaman dalam bentuk tumpukan, di mana Navigator.push digunakan untuk membuka
+                        halaman baru di atas halaman yang sedang aktif dan Navigator.pop digunakan untuk menutupnya
+                        kembali. Pengiriman data antarhalaman dapat dilakukan melalui constructor dengan variabel
+                        final dan parameter required, sehingga satu halaman detail dapat menampilkan isi yang
+                        berbeda sesuai data yang diterimanya. Penempatan Navigator.pop setelah validasi formulir
+                        juga memastikan halaman hanya ditutup ketika seluruh data, termasuk tanggal transaksi,
+                        telah diisi dengan benar.
+                    </p>
+
+                    <div>
+                        <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
+                        <span class="badge bg-info text-dark me-1">Flutter</span>
+                        <span class="badge bg-primary me-1">Dart</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-custom bg-dark text-white py-4 mt-5">
+        <div class="container text-center text-white-50 small">
+            © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
