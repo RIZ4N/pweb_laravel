@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Praktikum - Rizan Oesvan Idrati</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        img.placeholder-box {
+            border: 2px dashed #adb5bd !important;
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+            min-height: 150px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-code-square"></i> Rizan Oesvan Idrati
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="portofolio.html">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="kontak.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mt-5">
+
+        <div class="mb-4">
+            <a href="portofolio.html" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Kembali ke Portofolio
+            </a>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <span class="badge bg-info text-dark mb-2">Laporan Praktikum</span>
+                        <h1 class="fw-bold">Laporan Praktikum Aplikasi Mobile: Arsitektur Navigasi serta Integrasi
+                            Aplikasi Expense Tracker dengan Local Storage</h1>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">1. Pendahuluan</h4>
+                    <p class="mb-1 text-justify">
+                        Praktikum kelima Aplikasi Mobile ini membahas arsitektur navigasi pada Flutter melalui
+                        penerapan Named Routes dan BottomNavigationBar. Named Routes memungkinkan seluruh halaman
+                        aplikasi didaftarkan secara terpusat di dalam MaterialApp sehingga perpindahan halaman cukup
+                        dilakukan dengan memanggil nama rutenya, sedangkan BottomNavigationBar digunakan untuk
+                        berpindah antara halaman Beranda, Riwayat, dan Profil tanpa mengganti Scaffold utama.
+                    </p>
+                    <p class="mb-1 text-justify">
+                        Selain itu, praktikum ini juga menjadi tugas akhir yang menggabungkan seluruh hasil
+                        Praktikum 1 sampai 5 ke dalam satu aplikasi Expense Tracker. Karena praktikum sebelumnya
+                        masih menggunakan data statis, aplikasi dilengkapi dengan local storage berbasis SQLite
+                        sehingga data yang dimasukkan pengguna tidak hilang, serta fitur register dan login yang
+                        datanya juga tersimpan di database. Desain antarmuka dari praktikum sebelumnya tetap
+                        dipertahankan, dengan penyesuaian warna tema menjadi indigo.
+                    </p>
+
+                    <div class="mb text-justify">
+                        <h5 class="fw-bold mb-3 mt-4">Tujuan Praktikum:</h5>
+                        <ul>
+                            <li>Mahasiswa mampu menerapkan Named Routes untuk navigasi yang terpusat dan rapi.</li>
+                            <li>Mahasiswa mampu membangun menu navigasi bawah menggunakan BottomNavigationBar.</li>
+                            <li>Mahasiswa mampu mengintegrasikan halaman Beranda, Riwayat, dan Profil dalam satu
+                                wadah.</li>
+                            <li>Mahasiswa mampu menerapkan local storage menggunakan SQLite agar data aplikasi
+                                tersimpan secara permanen.</li>
+                            <li>Mahasiswa mampu membangun fitur register dan login yang datanya disimpan pada local
+                                storage.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4 mb-3">
+                        <a href="https://github.com/RIZ4N/PrakAppMob_B_2411531010" target="_blank" class="btn btn-dark btn-sm me-1">
+                            <i class="bi bi-github"></i> View Repository
+                        </a>
+                        <a href="https://youtu.be/ZDidkcatPpY" target="_blank" class="btn btn-danger btn-sm">
+                            <i class="bi bi-play-btn"></i> Video Penjelasan
+                        </a>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">2. Langkah Kerja</h4>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">A. Mendaftarkan Named Routes</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/mendaftarkannamedroutes.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Named Routes pada main.dart">
+                            <span class="text-muted small d-block mt-1">Kode Program: Named Routes pada
+                                main.dart</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada main.dart, parameter home pada MaterialApp diganti dengan initialRoute dan routes.
+                            Rute '/' diarahkan ke LoginScreen karena pengguna harus masuk terlebih dahulu, kemudian
+                            rute '/register' ke RegisterScreen, '/home' ke MainScreen yang berisi tab, dan '/add' ke
+                            AddTransactionScreen. Rute '/home' dan '/add' memeriksa Session.currentUser terlebih
+                            dahulu, sehingga apabila belum ada pengguna yang login, misalnya ketika halaman browser
+                            dimuat ulang, aplikasi menampilkan halaman login alih-alih halaman yang membutuhkan data
+                            pengguna. MaterialApp juga mengatur tema aplikasi melalui ColorScheme.fromSeed dan
+                            AppBarTheme dengan warna utama kPrimaryColor.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Membuat Penampung Tab (MainScreen)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/membuatpenampungtab.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: State dan Daftar Halaman pada MainScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: State dan Daftar Halaman pada
+                                MainScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            MainScreen pada main_screen.dart dibuat sebagai StatefulWidget karena tab yang aktif
+                            akan terus berubah. Variabel _selectedIndex bernilai awal 0 sehingga tab Beranda aktif
+                            secara default, sedangkan list _pages berisi tiga halaman yang akan ditukar, yaitu
+                            DashboardScreen, HistoryScreen, dan ProfileScreen. Method _onItemTapped memanggil
+                            setState untuk memperbarui _selectedIndex sesuai indeks tab yang ditekan pengguna.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Merangkai BottomNavigationBar</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/merangkaibottomnavigator.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: BottomNavigationBar pada MainScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: BottomNavigationBar pada
+                                MainScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method build pada MainScreen mengembalikan Scaffold dengan body berupa
+                            _pages[_selectedIndex], sehingga isi layar berganti mengikuti tab yang aktif. Properti
+                            bottomNavigationBar diisi BottomNavigationBar dengan currentIndex yang terikat pada
+                            _selectedIndex, onTap yang memanggil _onItemTapped, warna item aktif kPrimaryColor,
+                            serta tiga BottomNavigationBarItem berlabel Beranda, Riwayat, dan Profil.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Pembaruan Tombol Tambah Transaksi (pushNamed)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/pembaruantomboltambahtransaksi.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: FloatingActionButton dengan Navigator.pushNamed">
+                            <span class="text-muted small d-block mt-1">Kode Program: FloatingActionButton dengan
+                                Navigator.pushNamed</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            FloatingActionButton pada DashboardScreen yang sebelumnya menggunakan Navigator.push
+                            dengan MaterialPageRoute kini diganti menjadi Navigator.pushNamed(context, '/add').
+                            Pemanggilan tersebut ditunggu menggunakan await, sehingga setelah halaman formulir
+                            ditutup, method _loadData dijalankan untuk memuat ulang data transaksi dan saldo dari
+                            database.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">Hasil Akhir</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/halamanberandadenganbottomnavigator.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Akhir: Halaman Beranda dengan BottomNavigationBar">
+                            <span class="text-muted small d-block mt-1">Hasil Akhir: Halaman Beranda dengan
+                                BottomNavigationBar</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setelah login, aplikasi menampilkan halaman Beranda dengan BottomNavigationBar di bagian
+                            bawah layar yang berisi tab Beranda, Riwayat, dan Profil. Tab yang sedang aktif ditandai
+                            dengan warna indigo, dan menekan tab lain akan mengganti isi layar tanpa berpindah
+                            Scaffold utama.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">3. Tugas/Latihan Praktikum 5</h4>
+
+                    <div class="mb-5 mt-3">
+                        <h5 class="fw-bold">A. Halaman Riwayat Transaksi</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/pengambilandatadanfilter.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Pengambilan Data dan Filter pada HistoryScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: Pengambilan Data dan Filter
+                                pada HistoryScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            HistoryScreen dibuat sebagai StatefulWidget yang menyimpan list _transactions, pilihan
+                            filter aktif _filter dengan nilai awal 'Semua', serta daftar pilihan filter berisi
+                            Semua, Pemasukan, dan Pengeluaran. Method _loadData dipanggil pada initState untuk
+                            mengambil seluruh transaksi milik pengguna yang sedang login dari database. Getter
+                            _filteredTransactions kemudian menyaring list tersebut menggunakan method where
+                            berdasarkan properti isIncome, sehingga hanya transaksi yang sesuai dengan filter yang
+                            dikembalikan.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/choicechip.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: ChoiceChip dan ListView pada HistoryScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: ChoiceChip dan ListView pada
+                                HistoryScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Bagian atas halaman berisi Row yang menampilkan ChoiceChip untuk setiap pilihan filter.
+                            Chip yang terpilih diberi warna kPrimaryColor dengan teks putih, dan menekan chip akan
+                            memanggil setState untuk mengganti nilai _filter. Di bawahnya, widget Expanded berisi
+                            ListView.separated yang menampilkan transaksi hasil filter menggunakan TransactionTile
+                            dengan Divider sebagai pemisah, atau teks "Belum ada transaksi" apabila datanya kosong.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/filtersemua.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Halaman Riwayat dengan Filter Semua">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Halaman Riwayat dengan
+                                Filter Semua</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Halaman Riwayat menampilkan seluruh transaksi pengguna dengan urutan terbaru di bagian
+                            atas, lengkap dengan ikon kategori, tanggal, dan nominal yang berwarna hijau untuk
+                            pemasukan dan merah untuk pengeluaran.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/filterpengeluaran.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Halaman Riwayat dengan Filter Pengeluaran">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Halaman Riwayat dengan
+                                Filter Pengeluaran</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Ketika filter Pengeluaran dipilih, daftar langsung hanya menampilkan transaksi
+                            pengeluaran tanpa perlu memuat ulang data dari database, karena penyaringan dilakukan
+                            pada data yang sudah tersimpan di state halaman.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Halaman Profil</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/kodeprofilescreen.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: ProfileScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: ProfileScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            ProfileScreen merupakan StatelessWidget yang mengambil data pengguna dari
+                            Session.currentUser, lalu menampilkannya dalam Column yang berisi CircleAvatar dengan
+                            ikon person, Text nama, dan Text email. Tombol Logout dibuat menggunakan
+                            ElevatedButton.icon berwarna merah. Method _logout mengosongkan Session.currentUser,
+                            kemudian memanggil Navigator.pushNamedAndRemoveUntil ke rute '/' dengan kondisi yang
+                            selalu bernilai false, sehingga seluruh halaman pada tumpukan dihapus dan pengguna tidak
+                            dapat kembali ke halaman sebelumnya setelah logout.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/tampilanhalamanprofil.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Halaman Profil">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Halaman Profil</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Halaman Profil menampilkan avatar, nama, dan email sesuai akun yang sedang login,
+                            dengan tombol Logout di bagian bawah. Menekan tombol tersebut akan mengembalikan
+                            pengguna ke halaman Login.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Halaman Login</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/formpadaloginscreen.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Form pada LoginScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: Form pada LoginScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            LoginScreen dibuat sebagai StatefulWidget dengan GlobalKey&lt;FormState&gt; dan dua
+                            TextEditingController untuk email dan password. Form berisi ikon dompet, judul aplikasi,
+                            TextFormField email dengan validasi wajib diisi serta harus mengandung karakter '@' dan
+                            '.', dan TextFormField password dengan obscureText yang dapat diubah melalui IconButton
+                            pada suffixIcon. Di bawahnya terdapat tombol Login dan TextButton yang mengarah ke rute
+                            '/register'.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/methodlogin.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Method _login">
+                            <span class="text-muted small d-block mt-1">Kode Program: Method _login</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method _login menjalankan validasi form terlebih dahulu, kemudian memanggil
+                            DatabaseHelper.login dengan email yang sudah dirapikan menggunakan trim dan
+                            toLowerCase. Apabila hasilnya null, SnackBar merah berisi pesan "Email atau password
+                            salah" ditampilkan. Apabila data cocok, objek User disimpan ke Session.currentUser dan
+                            aplikasi berpindah ke rute '/home' menggunakan pushReplacementNamed, sehingga halaman
+                            login diganti dan tidak dapat diakses kembali melalui tombol kembali. Email pengguna yang
+                            login kemudian ditampilkan pada sapaan di halaman Beranda dan pada halaman Profil.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/halamanlogin.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Halaman Login">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Halaman Login</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Halaman Login menampilkan kolom email dan password beserta tombol Login dan tautan
+                            menuju halaman pendaftaran. Apabila tombol Login ditekan saat kolom masih kosong, pesan
+                            validasi berwarna merah muncul di bawah kolom yang belum diisi.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/logindenganpasswordsalah.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Login dengan Password Salah">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Login dengan Password
+                                Salah</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Ketika email atau password yang dimasukkan tidak sesuai dengan data di database,
+                            SnackBar merah berisi pesan "Email atau password salah" muncul dan pengguna tetap berada
+                            di halaman Login.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/emailpenggunapadahalamanberanda.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Email Pengguna pada Halaman Beranda">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Email Pengguna pada Halaman
+                                Beranda</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setelah login berhasil, halaman Beranda menampilkan sapaan berisi nama pengguna beserta
+                            email yang diinputkan saat login, sesuai dengan ketentuan tugas.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">4. Tugas Akhir: Integrasi Praktikum 1&ndash;5
+                        dengan Local Storage</h4>
+
+                    <div class="mb-5 mt-3">
+                        <h5 class="fw-bold">A. Struktur Project dan Package</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/strukturfolderliv.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Struktur Folder lib">
+                            <span class="text-muted small d-block mt-1">Struktur Folder lib</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Seluruh kode aplikasi disusun di dalam folder lib dan dibagi berdasarkan fungsinya, yaitu
+                            main.dart untuk konfigurasi aplikasi dan rute, models.dart untuk model data,
+                            database_helper.dart untuk pengelolaan database, file halaman seperti login_screen.dart,
+                            register_screen.dart, main_screen.dart, dashboard_screen.dart,
+                            add_transaction_screen.dart, transaction_detail_screen.dart, history_screen.dart, dan
+                            profile_screen.dart, serta transaction_tile.dart sebagai widget baris transaksi yang
+                            digunakan bersama.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/dependenciespadapubsecyaml.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Dependencies pada pubspec.yaml">
+                            <span class="text-muted small d-block mt-1">Kode Program: Dependencies pada
+                                pubspec.yaml</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Untuk local storage ditambahkan package sqflite sebagai penghubung ke database SQLite dan
+                            package path untuk menyusun lokasi file database. Karena aplikasi juga dijalankan di
+                            browser, ditambahkan pula package sqflite_common_ffi_web yang menyediakan SQLite versi
+                            web. Package tersebut membutuhkan perintah dart run sqflite_common_ffi_web:setup untuk
+                            menambahkan file pendukungnya ke folder web.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">B. Model Data dan Session</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/modelsdart.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: models.dart">
+                            <span class="text-muted small d-block mt-1">Kode Program: models.dart</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            File models.dart berisi class User dan TransactionItem yang merepresentasikan satu baris
+                            data dari tabel users dan transactions. Keduanya memiliki factory fromMap untuk mengubah
+                            hasil query menjadi objek, dan TransactionItem juga memiliki method toMap untuk
+                            menyimpan data. Getter isIncome menentukan bahwa transaksi berkategori Pemasukan
+                            menambah saldo, sedangkan getter amountText menyusun teks nominal beserta tanda plus
+                            atau minus. Class Session menyimpan pengguna yang sedang login dalam variabel static
+                            currentUser. File ini juga berisi konstanta kPrimaryColor, fungsi formatRupiah yang
+                            memberi pemisah titik setiap tiga digit, serta fungsi categoryIcon dan categoryColor
+                            untuk menentukan ikon dan warna setiap kategori.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">C. Local Storage dengan SQLite (DatabaseHelper)</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/konfigurasisqlite.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Konfigurasi SQLite Web pada Fungsi main">
+                            <span class="text-muted small d-block mt-1">Kode Program: Konfigurasi SQLite Web pada
+                                Fungsi main</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pada fungsi main, kondisi kIsWeb digunakan untuk mendeteksi apakah aplikasi berjalan di
+                            browser. Apabila benar, databaseFactory diganti dengan databaseFactoryFfiWeb agar
+                            sqflite menggunakan SQLite versi web, sedangkan saat dijalankan di Android aplikasi tetap
+                            menggunakan SQLite bawaan perangkat.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/inisialisasidatabasedanpembuatantabel.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Inisialisasi Database dan Pembuatan Tabel">
+                            <span class="text-muted small d-block mt-1">Kode Program: Inisialisasi Database dan
+                                Pembuatan Tabel</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Class DatabaseHelper menyimpan objek database dalam variabel static _database, dan getter
+                            database menggunakan operator ??= agar database hanya dibuka satu kali. Method
+                            _initDatabase menentukan lokasi file expense_tracker.db, lalu memanggil openDatabase
+                            dengan callback onCreate yang membuat dua tabel saat database pertama kali dibuat. Tabel
+                            users menyimpan nama, email, dan password dengan email bersifat UNIQUE, sedangkan tabel
+                            transactions menyimpan user_id, judul, nominal, kategori, dan tanggal sehingga setiap
+                            transaksi terhubung dengan pemiliknya.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/methodregister,login,danpengelolaantransaksi.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Method Register, Login, dan Pengelolaan Transaksi">
+                            <span class="text-muted small d-block mt-1">Kode Program: Method Register, Login, dan
+                                Pengelolaan Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method register memeriksa terlebih dahulu apakah email sudah ada di tabel users, lalu
+                            mengembalikan false apabila sudah terdaftar atau menyimpan data baru dan mengembalikan
+                            true. Method login mencari baris yang email dan password-nya cocok dan mengembalikan
+                            objek User atau null. Untuk transaksi, insertTransaction menyimpan data baru,
+                            getTransactions mengambil transaksi berdasarkan user_id dengan urutan id terbaru di
+                            atas, dan deleteTransaction menghapus transaksi berdasarkan id. Seluruh query
+                            menggunakan parameter whereArgs agar nilai yang dimasukkan pengguna tidak digabungkan
+                            langsung ke dalam perintah SQL.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">D. Halaman Register</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Form dan Validasi pada RegisterScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: Form dan Validasi pada
+                                RegisterScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            RegisterScreen memiliki empat TextFormField, yaitu nama lengkap, email, password, dan
+                            konfirmasi password, masing-masing dengan controller sendiri. Validator nama memastikan
+                            kolom tidak kosong, validator email memeriksa format email, validator password
+                            mewajibkan minimal enam karakter, dan validator konfirmasi password membandingkan isinya
+                            dengan _passwordController.text sehingga pendaftaran ditolak apabila kedua password
+                            tidak sama. Kolom password dan konfirmasi password juga dilengkapi tombol untuk
+                            menampilkan atau menyembunyikan isinya.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/methodregister.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Method _register">
+                            <span class="text-muted small d-block mt-1">Kode Program: Method _register</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method _register memanggil DatabaseHelper.register setelah form lolos validasi. Apabila
+                            hasilnya false, SnackBar merah berisi pesan "Email sudah terdaftar" ditampilkan. Apabila
+                            berhasil, SnackBar hijau muncul dan halaman ditutup menggunakan Navigator.pop sehingga
+                            pengguna kembali ke halaman Login untuk masuk dengan akun yang baru dibuat.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/validasipasswdtdksama.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Validasi Konfirmasi Password">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Validasi Konfirmasi
+                                Password</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Apabila isi kolom konfirmasi password berbeda dengan kolom password, pesan "Password
+                            tidak sama" muncul di bawah kolom konfirmasi dan data tidak disimpan ke database.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/registrasiberhasil.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Registrasi Berhasil">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Registrasi Berhasil</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setelah seluruh kolom diisi dengan benar, SnackBar hijau bertuliskan "Registrasi
+                            berhasil, silakan login" muncul dan aplikasi kembali ke halaman Login.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">E. Integrasi Halaman Beranda dengan Database</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/methodloaddata.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: State dan Method _loadData pada DashboardScreen">
+                            <span class="text-muted small d-block mt-1">Kode Program: State dan Method _loadData
+                                pada DashboardScreen</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            DashboardScreen yang pada praktikum sebelumnya berupa StatelessWidget kini diubah menjadi
+                            StatefulWidget karena datanya diambil dari database. Method _loadData dipanggil pada
+                            initState untuk mengambil transaksi milik pengguna, lalu menjumlahkan nominal transaksi
+                            pemasukan ke _totalIncome dan transaksi lainnya ke _totalExpense. Lima transaksi teratas
+                            disimpan ke _recentTransactions untuk ditampilkan sebagai Transaksi Terakhir.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/greetingwidgerdanbalancecardwidget.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: GreetingWidget dan BalanceCardWidget">
+                            <span class="text-muted small d-block mt-1">Kode Program: GreetingWidget dan
+                                BalanceCardWidget</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            GreetingWidget tetap berupa StatelessWidget dengan Row berisi CircleAvatar dan Column
+                            teks, namun kini menerima nama dan email melalui constructor sehingga sapaan sesuai
+                            dengan pengguna yang login. BalanceCardWidget tetap berupa StatefulWidget dengan
+                            variabel _isBalanceVisible dan setState untuk menyembunyikan saldo. Saldo utama dihitung
+                            dari income dikurangi expense, kemudian di bawahnya ditambahkan Divider dan Row berisi
+                            dua ringkasan yang dibangun melalui method _buildSummary, yaitu total pemasukan dengan
+                            ikon panah bawah hijau dan total pengeluaran dengan ikon panah atas merah. Ringkasan ini
+                            juga ikut tersensor ketika saldo disembunyikan.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/actionbuttondanrecenttransaction.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: ActionButtonsWidget dan RecentTransactionsWidget">
+                            <span class="text-muted small d-block mt-1">Kode Program: ActionButtonsWidget dan
+                                RecentTransactionsWidget</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            ActionButtonsWidget dipertahankan dengan Row spaceEvenly berisi tiga tombol yang dibangun
+                            melalui _buildActionButton, yaitu Column berisi Container berwarna transparan dan label
+                            teks. RecentTransactionsWidget menampilkan judul Transaksi Terakhir dan Card berisi
+                            Column. Setiap transaksi ditampilkan melalui TransactionTile dengan Divider di antaranya
+                            menggunakan perulangan for, atau teks "Belum ada transaksi" apabila datanya kosong.
+                            Widget ini juga menerima callback onChanged agar daftar dapat dimuat ulang ketika
+                            transaksi dihapus dari halaman detail.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/belumadatransaksi.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Beranda Sebelum Ada Transaksi">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Beranda Sebelum Ada
+                                Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Untuk akun yang baru didaftarkan, kartu saldo menampilkan saldo, pemasukan, dan
+                            pengeluaran bernilai nol, sedangkan bagian Transaksi Terakhir menampilkan teks "Belum
+                            ada transaksi".
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/setelahtransaksiditambahkan.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Beranda Setelah Transaksi Ditambahkan">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Beranda Setelah Transaksi
+                                Ditambahkan</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Setelah transaksi ditambahkan, saldo utama beserta ringkasan pemasukan dan pengeluaran
+                            terhitung otomatis, dan transaksi terbaru muncul pada daftar Transaksi Terakhir dengan
+                            warna nominal sesuai jenisnya.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/saldodanringkasandisembunyikan.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Saldo dan Ringkasan Disembunyikan">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Saldo dan Ringkasan
+                                Disembunyikan</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Ketika ikon mata ditekan, saldo utama serta nominal pemasukan dan pengeluaran pada kartu
+                            berubah menjadi tanda bintang.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">F. Form Tambah Transaksi dengan Penyimpanan ke Database</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/controller,kategori,danmethodselectdate.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Controller, Kategori, dan Method _selectDate">
+                            <span class="text-muted small d-block mt-1">Kode Program: Controller, Kategori, dan
+                                Method _selectDate</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            AddTransactionScreen memiliki tiga TextEditingController untuk judul, nominal, dan
+                            tanggal, serta daftar kategori yang kini ditambah opsi Pemasukan agar pengguna dapat
+                            mencatat transaksi pemasukan. Method _selectDate memanggil showDatePicker, lalu
+                            memformat tanggal yang dipilih ke pola DD/MM/YYYY menggunakan padLeft, sedangkan method
+                            dispose membersihkan seluruh controller ketika halaman ditutup.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/methodsavetransaction.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Method _saveTransaction">
+                            <span class="text-muted small d-block mt-1">Kode Program: Method
+                                _saveTransaction</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Method _saveTransaction menjalankan validasi form, kemudian membuat objek TransactionItem
+                            dari isi setiap kolom beserta id pengguna dari Session dan menyimpannya melalui
+                            DatabaseHelper.insertTransaction. Setelah tersimpan, SnackBar hijau ditampilkan dan
+                            halaman ditutup dengan Navigator.pop. Validator nominal juga diperketat sehingga selain
+                            harus berupa angka bulat, nilainya harus lebih dari nol.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/validasiformtambahtransaksi.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Validasi Form Tambah Transaksi">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Validasi Form Tambah
+                                Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Apabila tombol Simpan Transaksi ditekan saat form masih kosong, pesan validasi berwarna
+                            merah muncul pada kolom judul, nominal, dan tanggal.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/transaksiterisi.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Form Tambah Transaksi Terisi">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Form Tambah Transaksi
+                                Terisi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Form yang telah diisi menampilkan judul, nominal, kategori yang dipilih, dan tanggal
+                            dalam format DD/MM/YYYY. Setelah disimpan, aplikasi kembali ke Beranda dengan data yang
+                            sudah diperbarui.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">G. Detail dan Hapus Transaksi</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/transactiontile.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: TransactionTile">
+                            <span class="text-muted small d-block mt-1">Kode Program: TransactionTile</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            TransactionTile merupakan ListTile yang digunakan bersama oleh halaman Beranda dan
+                            Riwayat. Bagian leading menampilkan CircleAvatar dengan ikon dan warna sesuai kategori,
+                            title berisi judul, subtitle berisi tanggal, dan trailing berisi nominal berwarna hijau
+                            atau merah. Pada onTap, data transaksi dikirim melalui constructor ke
+                            TransactionDetailScreen menggunakan Navigator.push. Hasil dari halaman detail ditunggu
+                            dengan await, dan apabila bernilai true, callback onChanged dipanggil untuk memuat ulang
+                            daftar transaksi.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/constructordanmethoddeletetransaction.png"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Kode Program: Constructor dan Method _deleteTransaction">
+                            <span class="text-muted small d-block mt-1">Kode Program: Constructor dan Method
+                                _deleteTransaction</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            TransactionDetailScreen kini menerima tambahan parameter id melalui constructor agar
+                            transaksi dapat dihapus. Method _deleteTransaction menampilkan AlertDialog berisi tombol
+                            Batal dan Hapus. Apabila pengguna memilih Hapus, transaksi dihapus melalui
+                            DatabaseHelper.deleteTransaction, SnackBar ditampilkan, lalu halaman ditutup dengan
+                            Navigator.pop(context, true) sebagai tanda bahwa data telah berubah. Warna nominal pada
+                            halaman detail juga disesuaikan menjadi hijau untuk pemasukan dan merah untuk
+                            pengeluaran.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/halamandetailtransaksi.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Halaman Detail Transaksi">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Halaman Detail
+                                Transaksi</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Halaman detail menampilkan judul, nominal, kategori, tanggal, dan status transaksi yang
+                            dipilih, dengan tombol Hapus Transaksi berwarna merah di bagian bawah.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/konfirmasihapus.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Dialog Konfirmasi Hapus">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Dialog Konfirmasi
+                                Hapus</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Saat tombol Hapus Transaksi ditekan, dialog konfirmasi muncul terlebih dahulu. Setelah
+                            dikonfirmasi, aplikasi kembali ke halaman sebelumnya dan transaksi tersebut sudah tidak
+                            tampil, dengan saldo yang ikut diperbarui.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">H. Pengujian Penyimpanan Data</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/halamandimuatulang.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil Tampilan: Data Tetap Tersimpan Setelah Halaman Dimuat Ulang">
+                            <span class="text-muted small d-block mt-1">Hasil Tampilan: Data Tetap Tersimpan Setelah
+                                Halaman Dimuat Ulang</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Pengujian dilakukan dengan logout, memuat ulang halaman browser sehingga aplikasi
+                            dijalankan kembali dari awal, lalu login menggunakan akun yang sama. Akun tetap dapat
+                            digunakan dan seluruh transaksi beserta saldo masih tampil seperti sebelumnya, yang
+                            menunjukkan bahwa data tersimpan pada database SQLite dan tidak hanya berada di memori
+                            sementara aplikasi.
+                        </p>
+                    </div>
+
+                    <div class="mb-5">
+                        <h5 class="fw-bold">I. Build Aplikasi menjadi APK</h5>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/buildapk.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Proses Build APK">
+                            <span class="text-muted small d-block mt-1">Proses Build APK</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            Aplikasi dibangun menjadi file instalasi Android menggunakan perintah flutter build apk
+                            --release. Perintah ini mengompilasi kode Dart beserta seluruh package ke dalam mode
+                            release yang lebih ringan dan cepat dibandingkan mode debug.
+                        </p>
+                        <div class="text-center mb-3">
+                            <img src="images/MobApp/Praktikum5/folderapk.jpg"
+                                class="img-fluid border rounded placeholder-box"
+                                alt="Hasil File APK">
+                            <span class="text-muted small d-block mt-1">Hasil File APK</span>
+                        </div>
+                        <p class="text-justify mb-4">
+                            File hasil build bernama app-release.apk dan berada di folder
+                            build/app/outputs/flutter-apk. File tersebut dapat langsung dipasang pada perangkat
+                            Android.
+                        </p>
+                    </div>
+
+                    <h4 class="fw-bold text-primary border-bottom pb-2">5. Kesimpulan</h4>
+                    <p class="mb-5 text-justify">
+                        Berdasarkan praktikum yang telah dilakukan, dapat disimpulkan bahwa Named Routes membuat
+                        pengelolaan navigasi menjadi lebih terpusat karena seluruh halaman didaftarkan di satu
+                        tempat, sedangkan BottomNavigationBar memungkinkan beberapa halaman utama diakses dalam satu
+                        wadah dengan mengganti isi body berdasarkan indeks tab yang aktif. Penggabungan Praktikum 1
+                        sampai 5 menunjukkan bahwa konsep StatelessWidget dan StatefulWidget, widget tata letak,
+                        formulir dengan validasi, serta navigasi dan passing data dapat dipadukan menjadi satu
+                        aplikasi yang utuh. Penambahan local storage menggunakan SQLite membuat data akun dan
+                        transaksi tetap tersimpan meskipun aplikasi dijalankan ulang, sekaligus memungkinkan fitur
+                        register dan login yang memisahkan data setiap pengguna.
+                    </p>
+
+                    <div>
+                        <h6 class="fw-bold text-muted mb-2">Teknologi yang digunakan:</h6>
+                        <span class="badge bg-info text-dark me-1">Flutter</span>
+                        <span class="badge bg-primary me-1">Dart</span>
+                        <span class="badge bg-secondary me-1">SQLite</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-custom bg-dark text-white py-4 mt-5">
+        <div class="container text-center text-white-50 small">
+            © 2025 Rizan Oesvan Idrati. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
